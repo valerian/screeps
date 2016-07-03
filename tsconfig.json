@@ -1,0 +1,24 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "es6",
+        "removeComments": true,
+        "noResolve": false,
+        "noImplicitAny": true
+    },
+    "compileOnSave": false,
+    "exclude": "dist",
+    "files": [
+        "typings/index.d.ts",
+        "src/boot/main.ts",
+        "typings/globals/lodash/index.d.ts",
+        "typings/globals/screeps/index.d.ts"
+    ],
+    "bundles": {
+        "main": {
+            "files": [
+                "src/boot/main.ts"
+            ]
+        }
+    }
+}
