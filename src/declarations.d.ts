@@ -1,5 +1,4 @@
 interface Spawn {
-    spooked: number;
     lastDevelopmentLevel: number;
     isMain: boolean;
 }
