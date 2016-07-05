@@ -24,6 +24,7 @@ export namespace Config {
     }
 
     export function save() {
+        Log.debug('attempting to save', { file: 'config', initialStateDefined: typeof initialState !== 'undefined', hasChanged:_hasChanged()});
         if (typeof initialState !== 'undefined' && !_hasChanged())
             return;
         if (!Memory.config)
@@ -37,11 +38,9 @@ export namespace Config {
     export function _hasChanged(): boolean {
         let hasChanged = false;
         if (initialState)
-            _.forEach(initialState, (value, key) => {
-                if ((Config as {[key: string]: any})[key] != value) {
+            for (let key in initialState)
+                if ((Config as {[key: string]: any})[key] != initialState[key])
                     return true;
-                }
-            });
         return false;
     }
 }

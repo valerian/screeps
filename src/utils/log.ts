@@ -5,7 +5,7 @@ export namespace Log {
     export class LogEntry {
         constructor(public level: LEVEL,
                     public message: string,
-                    public context?: { [key: string]: string },
+                    public context?: { [key: string]: any },
                     public date?: string,
                     public tick?: number) {
             this.date = date || getFormattedDate();
@@ -37,27 +37,27 @@ export namespace Log {
         ERROR
     }
 
-    export function trace(message: string, context?: { [key: string]: string }): LogEntry {
+    export function trace(message: string, context?: { [key: string]: any }): LogEntry {
         return log(LEVEL.TRACE, message, context);
     }
     
-    export function debug(message: string, context?: { [key: string]: string }): LogEntry {
+    export function debug(message: string, context?: { [key: string]: any }): LogEntry {
         return log(LEVEL.DEBUG, message, context);
     }
     
-    export function info(message: string, context?: { [key: string]: string }): LogEntry {
+    export function info(message: string, context?: { [key: string]: any }): LogEntry {
         return log(LEVEL.INFO, message, context);
     }
     
-    export function warn(message: string, context?: { [key: string]: string }): LogEntry {
+    export function warn(message: string, context?: { [key: string]: any }): LogEntry {
         return log(LEVEL.WARN, message, context);
     }
     
-    export function error(message: string, context?: { [key: string]: string }): LogEntry {
+    export function error(message: string, context?: { [key: string]: any }): LogEntry {
         return log(LEVEL.ERROR, message, context);
     }
     
-    export function log(level: LEVEL, message: string, context?: { [key: string]: string }): LogEntry {
+    export function log(level: LEVEL, message: string, context?: { [key: string]: any }): LogEntry {
         let entry: LogEntry = new LogEntry(level, message, context);
         if (level >= Config.logConsoleLevel)
             console.log(entry.getLine(true, true, true, true));
