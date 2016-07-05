@@ -1,19 +1,18 @@
 import { Config } from '../config/config';
 
 export namespace Log {
-    
+
     export class LogEntry {
-        date: string;
-        tick: number;
-        
         constructor(public level: LEVEL,
                     public message: string,
-                    public context?: { [key: string]: string }) {
-            this.date = getFormattedDate();
-            this.tick = Game.time;
+                    public context?: { [key: string]: string },
+                    public date?: string,
+                    public tick?: number) {
+            this.date = date || getFormattedDate();
+            this.tick = tick || Game.time;
         }
 
-        getLine(showLevel: boolean, showDate: boolean, showTick: boolean, showContext: boolean): string {
+        getLine(showLevel: boolean = true, showDate: boolean = true, showTick: boolean = true, showContext: boolean = true): string {
             let line: string = '';
             if (showLevel)
                 line += '[' + LEVEL[this.level] + '] ';
@@ -60,15 +59,21 @@ export namespace Log {
     
     export function log(level: LEVEL, message: string, context?: { [key: string]: string }): LogEntry {
         let entry: LogEntry = new LogEntry(level, message, context);
-        if (Config.logConsoleLevel <= level)
+        if (level >= Config.logConsoleLevel)
             console.log(entry.getLine(true, true, true, true));
-        if (Config.logNotifyLevel <= level)
+        if (level >= Config.logNotifyLevel)
             Game.notify(entry.getLine(true, true, true, true), Config.logNotifyMinutes);
-        if (Config.logMemoryLevel <= level) {
+        if (level >= Config.logMemoryLevel) {
             let memoryLog = _getMemory();
             memoryLog.unshift(entry);
             while (memoryLog.length > Config.logMemorySize)
                 memoryLog.pop();
+        }
+        if (level >= LEVEL.INFO) {
+            let memoryLogInfo = _getMemoryInfo();
+            memoryLogInfo.unshift(entry);
+            while (memoryLogInfo.length > Config.logMemorySize)
+                memoryLogInfo.pop();
         }
         return entry;
     }
@@ -82,5 +87,11 @@ export namespace Log {
         if (!Memory['log'])
             Memory['log'] = new Array<LogEntry>();
         return <LogEntry[]> Memory['log'];
+    }
+
+    function _getMemoryInfo(): LogEntry[] {
+        if (!Memory['logInfo'])
+            Memory['logInfo'] = new Array<LogEntry>();
+        return <LogEntry[]> Memory['logInfo'];
     }
 }

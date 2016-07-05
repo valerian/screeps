@@ -1,15 +1,24 @@
-/// <reference path="./declarations.d.ts" />
+/// <reference path="./extensions.d.ts" />
 
 export namespace Extensions {
     
     export function init() {
+        // Spawn
         extendMemoryShortcut(Spawn.prototype, 'spawns', ['lastDevelopmentLevel', 'isMain']);
+
+        // Room
         extendMemoryShortcut(Room.prototype, 'rooms', ['my']);
         extendGetterMemoized(Room.prototype, 'spawns', (self:Room) => {
             return _.filter(Game.spawns, (spawn) => spawn.room.name == self.name);
         });        
         extendGetterMemoized(Room.prototype, 'mainSpawn', (self:Room) => {
             return self.spawns[0];
+        });
+
+        // Creep
+        extendMemoryShortcut(Creep.prototype, 'creeps', ['level', 'motherName', 'role', 'task']);
+        extendGetter(Creep.prototype, 'mother', (self:Creep) => {
+            return Game.spawns[self.motherName];
         });        
     }
 

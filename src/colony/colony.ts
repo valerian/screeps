@@ -1,5 +1,4 @@
-import { Log } from './utils/log';
-
+import { Log } from '../utils/log';
 
 export class Colony {
     public room: Room;
@@ -20,7 +19,7 @@ export class Colony {
         this.controller = room.controller;
     }
 
-    public run():void {
-        Log.info('colony "' + this.room.name + '" running', { room: this.room.name });
+    public run(): void {
+        Log.trace('colony "' + this.room.name + '" running', { file: 'colony', room: this.room.name });
     }
 }
