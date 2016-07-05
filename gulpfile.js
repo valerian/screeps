@@ -51,7 +51,7 @@ gulp.task('upload-sim', ['compile'], function () {
 });
 
 gulp.task('watch', function () {
-  gulp.watch('./src/**/*.ts', ['compile']);
+  gulp.watch('./src/**/*.ts', ['build']);
 });
 
 gulp.task('build', ['upload-sim']);
