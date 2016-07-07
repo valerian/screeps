@@ -51,4 +51,5 @@ $ npm run deploy
 ## Special thanks
 
 [Marko Sulamägi](https://github.com/MarkoSulamagi), for the original [Screeps/TypeScript sample project](https://github.com/MarkoSulamagi/Screeps-typescript-sample-project).
+
 [Resi Respati](https://github.com/resir014) for the updated [screeps-starter](https://github.com/resir014/screeps-typescript-starter), and all the help he provided me through Slack
