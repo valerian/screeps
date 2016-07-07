@@ -1,95 +1,46 @@
-import { Log } from '../utils/log'
-import { Config } from '../config/config'
+import { Log } from '../utils/log';
+import { Config } from '../config/config';
 import { CreepRole } from '../declarations/declarations';
+import { CreepFactoryRecipes } from '../config/creepFactoryRecipes';
 
-class CreepFactoryComponent {
-    public part: CreepBodyPart;
-    public ratioWeight: number;
-    public minimum: number;
-    public maximum: number;
-    public isRatioEnforced: boolean;
-    public get cost() { return BODYPART_COST[this.part]; }
-    
-    public constructor(part: CreepBodyPart, ratio: number) {
-        this.part = part;
-        this.ratioWeight = ratio;
-    }
-    
-    public setMinimum(value: number): CreepFactoryComponent {
-        this.minimum = value;
-        return this;
-    }
-    
-    public setMaximum(value: number): CreepFactoryComponent {
-        this.maximum = value;
-        return this;
-    }
-    
-    public enforceRatio(): CreepFactoryComponent {
-        this.isRatioEnforced = true;
-        return this;
-    }
-}
+export namespace CreepFactory {
+    let recipes: {[role: number]: CreepFactoryComponent[]} = {};
 
-export class CreepFactory {
-    public recipes: {[role: number]: CreepFactoryComponent[]};
-
-    constructor() {
-        this.recipes = {};
-        this.recipes[CreepRole.Miner] = [
-            new CreepFactoryComponent('work', 99).setMinimum(1).setMaximum(5),
-            new CreepFactoryComponent('move', 1).setMinimum(1).setMaximum(3)
-        ];
-        this.recipes[CreepRole.MinerLink] = [
-            new CreepFactoryComponent('work', 98).setMinimum(1).setMaximum(5),
-            new CreepFactoryComponent('carry', 1).setMinimum(1).setMaximum(1),
-            new CreepFactoryComponent('move', 1).setMinimum(1).setMaximum(3)
-        ];
-        this.recipes[CreepRole.Prospector] = [
-            new CreepFactoryComponent('work', 50).setMinimum(1).setMaximum(5),
-            new CreepFactoryComponent('move', 50).setMinimum(1).setMaximum(5).enforceRatio()
-        ];
-        this.recipes[CreepRole.Transporter] = [
-            new CreepFactoryComponent('carry', 2/3).setMinimum(1),
-            new CreepFactoryComponent('move', 1/3).setMinimum(1).enforceRatio()
-        ];        
-        this.recipes[CreepRole.Hauler] = [
-            new CreepFactoryComponent('carry', 50).setMinimum(1),
-            new CreepFactoryComponent('move', 50).setMinimum(1).enforceRatio()
-        ];        
-        this.recipes[CreepRole.Worker] = [
-            new CreepFactoryComponent('work', 41).setMinimum(1),
-            new CreepFactoryComponent('carry', 25).setMinimum(1),
-            new CreepFactoryComponent('move', 33).setMinimum(1).enforceRatio()
-        ];        
-        this.recipes[CreepRole.Engineer] = [
-            new CreepFactoryComponent('work', 30).setMinimum(1),
-            new CreepFactoryComponent('carry', 20).setMinimum(1),
-            new CreepFactoryComponent('move', 50).setMinimum(1).enforceRatio()
-        ];        
-        this.recipes[CreepRole.Scout] = [
-            new CreepFactoryComponent('move', 1).setMinimum(1).setMaximum(1),
-        ];        
-        this.recipes[CreepRole.Ram] = [
-            new CreepFactoryComponent('tough', 20).setMinimum(1),
-            new CreepFactoryComponent('work', 30).setMinimum(1),
-            new CreepFactoryComponent('move', 50).setMinimum(1).enforceRatio()
-        ];        
-        this.recipes[CreepRole.Soldier] = [
-            new CreepFactoryComponent('tough', 20).setMinimum(1),
-            new CreepFactoryComponent('attack', 15).setMinimum(1),
-            new CreepFactoryComponent('ranged_attack', 15).setMinimum(1),
-            new CreepFactoryComponent('move', 50).setMinimum(1).enforceRatio()
-        ];        
-        this.recipes[CreepRole.Healer] = [
-            new CreepFactoryComponent('tough', 20).setMinimum(1),
-            new CreepFactoryComponent('heal', 30).setMinimum(1),
-            new CreepFactoryComponent('move', 50).setMinimum(1).enforceRatio()
-        ];        
+    export function addRecipe(role:CreepRole, recipe:CreepFactoryComponent[]) {
+        recipes[role] = recipe;
     }
 
-    public designBlueprint(role: CreepRole, desiredCost: number): CreepBodyPart[] {
-        let recipe: CreepFactoryComponent[] = this.recipes[role];
+    export class CreepFactoryComponent {
+        public part: CreepBodyPart;
+        public ratioWeight: number;
+        public minimum: number;
+        public maximum: number;
+        public isRatioEnforced: boolean;
+        public get cost() { return BODYPART_COST[this.part]; }
+        
+        public constructor(part: CreepBodyPart, ratio: number) {
+            this.part = part;
+            this.ratioWeight = ratio;
+        }
+        
+        public setMinimum(value: number): CreepFactoryComponent {
+            this.minimum = value;
+            return this;
+        }
+        
+        public setMaximum(value: number): CreepFactoryComponent {
+            this.maximum = value;
+            return this;
+        }
+        
+        public enforceRatio(): CreepFactoryComponent {
+            this.isRatioEnforced = true;
+            return this;
+        }
+    }
+
+    export function designBlueprint(role: CreepRole, desiredCost: number): CreepBodyPart[] {
+        let recipe: CreepFactoryComponent[] = recipes[role];
         let design: {[part: string]: number} = {};
         let cost: number = 0;
         let ratioSum: number = 0;

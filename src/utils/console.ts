@@ -1,10 +1,11 @@
 import { Log } from '../utils/log'
 import { Config } from '../config/config'
 import { Test } from '../test/test';
+import { Bootstrapper } from '../bootstrapper'
 
 export namespace Console {
     
-    export function init() {
+    function init() {
         // non-function global accessors
         global['test'] = Test;
         
@@ -15,7 +16,8 @@ export namespace Console {
         global['debugMode'] = debugMode;
         global['traceMode'] = traceMode;
     }
-    
+    Bootstrapper.registerBootstrapFunction(init);
+
     export function logdump(level: Log.Level = Log.Level.Info): boolean {
         let version = level >= Log.Level.Info ? 'logInfo' : 'log';
         let counter: number = 0;

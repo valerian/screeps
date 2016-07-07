@@ -1,8 +1,10 @@
 /// <reference path="./extensions.d.ts" />
 
+import { Bootstrapper } from '../bootstrapper'
+
 export namespace Extensions {
     
-    export function init() {
+    function init() {
         // Spawn
         extendMemoryShortcut(Spawn.prototype, 'spawns', ['lastDevelopmentLevel', 'isMain']);
 
@@ -21,6 +23,7 @@ export namespace Extensions {
             return Game.spawns[self.motherName];
         });        
     }
+    Bootstrapper.registerBootstrapFunction(init);
 
     export function extendMemoryShortcut(prototype: any, path: string, properties: string[], key: string = 'name'): void {
         let propertiesData: PropertyDescriptorMap = {};

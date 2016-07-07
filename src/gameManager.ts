@@ -1,3 +1,5 @@
+import { Bootstrapper } from './bootstrapper';
+
 import { Declarations } from './declarations/declarations';
 
 import { Config } from './config/config';
@@ -7,13 +9,12 @@ import { Console } from './utils/console';
 
 import { Colony } from './colony/colony';
 
-
 export namespace GameManager {
+    
     export function globalBootstrap() {
         Log.trace('bootstrapping', {file: 'GameManager'});
-        Extensions.init();
         Config.load();
-        Console.init();
+        Bootstrapper.execute();
     }
 
     export function loop() {
