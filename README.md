@@ -1,26 +1,15 @@
-# screeps-starter
 
-> Starter kit for [TypeScript](http://www.typescriptlang.org/)-based [Screeps](https://screeps.com/) AI codes.
 
-This starter kit is a modified version of the original [Screeps/TypeScript sample project](https://github.com/MarkoSulamagi/Screeps-typescript-sample-project) by [Marko Sulamägi](https://github.com/MarkoSulamagi).
+# Valerian's Screeps Script
 
-## Getting Started
+> Script for [TypeScript](http://www.typescriptlang.org/)-based [Screeps](https://screeps.com/) AI codes.
 
-After you create a spawn, this bot will create 4 creeps which will start to harvest the closest source. The bots harvest, then transfer energy back to Spawn. If a creep's lifespan has depleted enough, it will refill in Spawn.
+Project skeleton based on [screeps-starter](https://github.com/resir014/screeps-typescript-starter) by [Resi Respati](https://github.com/resir014), which is a modified version of the original [Screeps/TypeScript sample project](https://github.com/MarkoSulamagi/Screeps-typescript-sample-project) by [Marko Sulamägi](https://github.com/MarkoSulamagi).
 
-### Important note about Typings definitions
+## Project status
 
-The Screeps type definitions included might not be the latest version available! Until it's available from within the Typings repository, don't forget to update the **commit hash** of the Screeps type definitions from within `typings.json` into the latest hash. View their repository [here](https://github.com/screepers/Screeps-Typescript-Declarations) for latest updates.
-
-Another option is to install it directly via npm.
-
-```bash
-$ npm install --save screeps-typescript-declarations
-```
-
-Once installed include it by going to `tsconfig.json` and adding `node_modules/screeps-typescript-declarations/dist/screeps.d.ts` just after `typings/index.d.ts` within the `files` property.
-
-> **Heads up!** Be sure to add the type definitions **before** other files within the `files` property of the `tsconfig.json` file, else VS Code will (sometimes) shit the bed and show a lot of errors regarding missing types.
+This script does not yet interract with the world, and for the moment is mostly an architecture for an AI yet to be done.
+It already includes many useful internal features, such as a comprehensive creep blueprint generator, a logging system with log levels and in-memory archiving, a config system, extra console commands, useful core game classes extensions (through prototype alteration), and other little things.  
 
 ### Requirements
 
@@ -62,3 +51,4 @@ $ npm run deploy
 ## Special thanks
 
 [Marko Sulamägi](https://github.com/MarkoSulamagi), for the original [Screeps/TypeScript sample project](https://github.com/MarkoSulamagi/Screeps-typescript-sample-project).
+[Resi Respati](https://github.com/resir014) for the updated [screeps-starter](https://github.com/resir014/screeps-typescript-starter), and all the help he provided me through Slack
