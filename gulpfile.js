@@ -15,8 +15,8 @@ gulp.task('clean', function () {
 });
 
 gulp.task('compile', ['clean'], function () {
-  return tsproject.src('./tsconfig.json')
-    .pipe(gulp.dest('dist'));
+    return tsproject.src('./tsconfig.json')
+        .pipe(gulp.dest('dist'));
 });
 
 gulp.task('upload-sim', ['compile'], function () {

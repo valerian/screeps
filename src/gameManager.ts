@@ -1,3 +1,5 @@
+import { Declarations } from './declarations/declarations';
+
 import { Config } from './config/config';
 import { Extensions } from './extensions/extensions';
 import { Log } from './utils/log';
@@ -5,9 +7,8 @@ import { Console } from './utils/console';
 
 import { Colony } from './colony/colony';
 
-export namespace GameManager {
-    export var colonies: Colony[];
 
+export namespace GameManager {
     export function globalBootstrap() {
         Log.trace('bootstrapping', {file: 'GameManager'});
         Extensions.init();
@@ -16,9 +17,17 @@ export namespace GameManager {
     }
 
     export function loop() {
+        _cleanMemory();
         Log.trace('looping', {file: 'GameManager'});
         Config.load();
-        colonies = Colony.findColonies();
-        _.forEach(colonies, (colony) => colony.run());
+        _.forEach(Colony.getColonies(), (colony) => colony.run());
+    }
+
+    function _cleanMemory()
+    {
+        for (let key in ['creeps', 'spawns', 'rooms', 'flags'])
+            for (let i in Memory[key])
+                if(!(Game as { [name: string]: any })[key][i])
+                    delete Memory[key][i];
     }
 }

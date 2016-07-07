@@ -1,17 +1,3 @@
-interface Memory {
-    config: { [key: string]: any }
-    [key: string]: {
-        [key: string]: any;
-    };
-}
-
-interface global {
-    [key: string]: any;
-}
-
-declare var global: global;
-
-////////////////////
 
 interface Spawn {
     lastDevelopmentLevel: number;
@@ -31,3 +17,4 @@ interface Creep {
     role: string;
     task: any;
 }
+

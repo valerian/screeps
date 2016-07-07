@@ -7,7 +7,10 @@
         "noImplicitAny": true
     },
     "compileOnSave": false,
-    "exclude": "dist",
+    "exclude": [
+        "dist",
+        "node_modules"
+    ],
     "files": [
         "typings/index.d.ts",
         "src/boot/main.ts",

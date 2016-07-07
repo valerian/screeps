@@ -3,11 +3,12 @@ import { Log } from '../utils/log';
 export namespace Config {
     let initialState: {[key: string]: any};
     
-    export let logConsoleLevel: Log.LEVEL = Log.LEVEL.INFO;
-    export let logNotifyLevel: Log.LEVEL = Log.LEVEL.WARN;
+    export let logConsoleLevel: Log.Level = Log.Level.Info;
+    export let logNotifyLevel: Log.Level = Log.Level.Warn;
     export let logNotifyMinutes: number = 5;
-    export let logMemoryLevel: Log.LEVEL = Log.LEVEL.TRACE;
+    export let logMemoryLevel: Log.Level = Log.Level.Trace;
     export let logMemorySize: number = 5000;
+    export let creepFactoryRefineIterations: number = 25;
 
     export function load() {
         if (!Memory.config) {
