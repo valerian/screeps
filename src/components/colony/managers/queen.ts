@@ -1,7 +1,7 @@
 import { Colony } from '../colony'
-import { CreepFactory } from '../../creep/factory'
+import { CreepFactory } from '../../creepFactory/creepFactory'
 
-export class ColonyQueen {    
+export class ColonyQueen {
     public colony: Colony;
     public needEnergy: boolean;
 
@@ -10,4 +10,3 @@ export class ColonyQueen {
         this.needEnergy = false;
     }
 }
-

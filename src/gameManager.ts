@@ -7,10 +7,10 @@ import { Extensions } from './extensions/extensions';
 import { Log } from './utils/log';
 import { Console } from './utils/console';
 
-import { Colony } from './colony/colony';
+import { Colony } from './components/colony/colony';
 
 export namespace GameManager {
-    
+
     export function globalBootstrap() {
         Log.trace('bootstrapping', {file: 'GameManager'});
         Config.load();

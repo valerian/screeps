@@ -3,7 +3,7 @@
 import { Bootstrapper } from '../bootstrapper'
 
 export namespace Extensions {
-    
+
     function init() {
         // Spawn
         extendMemoryShortcut(Spawn.prototype, 'spawns', ['lastDevelopmentLevel', 'isMain']);
@@ -12,7 +12,7 @@ export namespace Extensions {
         extendMemoryShortcut(Room.prototype, 'rooms', ['my']);
         extendGetterMemoized(Room.prototype, 'spawns', (self:Room) => {
             return _.filter(Game.spawns, (spawn) => spawn.room.name == self.name);
-        });        
+        });
         extendGetterMemoized(Room.prototype, 'mainSpawn', (self:Room) => {
             return self.spawns[0];
         });
@@ -21,7 +21,7 @@ export namespace Extensions {
         extendMemoryShortcut(Creep.prototype, 'creeps', ['level', 'motherName', 'role', 'task']);
         extendGetter(Creep.prototype, 'mother', (self:Creep) => {
             return Game.spawns[self.motherName];
-        });        
+        });
     }
     Bootstrapper.registerBootstrapFunction(init);
 
@@ -29,7 +29,7 @@ export namespace Extensions {
         let propertiesData: PropertyDescriptorMap = {};
         if (!Memory[path])
             Memory[path] = {};
-        
+
         for (let i in properties)
             propertiesData[properties[i]] = {
                 get: function () {
@@ -37,7 +37,7 @@ export namespace Extensions {
                 },
                 set: function (value) {
                     if (!Memory[path][this[key]])
-                        Memory[path][this[key]] = {};          
+                        Memory[path][this[key]] = {};
                     Memory[path][this[key]][properties[i]] = value;
                 },
                 enumerable: true,
@@ -59,14 +59,14 @@ export namespace Extensions {
     }
 
     export function extendGetterMemoized(prototype: any, property: string, func: (self:any) => any): void {
-        
+
         Object.defineProperty(prototype, property, {
             get: function () {
-                
+
                 if (!this.hasOwnProperty('__memoized__')) {
-                    Object.defineProperty(this, '__memoized__', { value: new Map() });                
+                    Object.defineProperty(this, '__memoized__', { value: new Map() });
                 }
-                
+
                 return this.__memoized__.has(property) ?
                         this.__memoized__.get(property) :
                         (() => {

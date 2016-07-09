@@ -1,4 +1,4 @@
-import { Log } from '../utils/log';
+import { Log } from '../../utils/log';
 import { ColonyArchitect } from './managers/architect'
 import { ColonyGeneral } from './managers/general'
 import { ColonyOverseer } from './managers/overseer'
@@ -6,7 +6,7 @@ import { ColonyQueen } from './managers/queen'
 
 export class Colony {
     private static colonies: Colony[];
-    
+
     public room: Room;
     public spawn: Spawn;
     public controller: Controller;
@@ -14,7 +14,7 @@ export class Colony {
     public general: ColonyGeneral;
     public overseer: ColonyOverseer;
     public queen: ColonyQueen;
-    
+
     public static getColonies(): Colony[] {
         if (!this.colonies) {
             this.colonies = new Array<Colony>();
@@ -24,7 +24,7 @@ export class Colony {
         }
         return this.colonies;
     }
-    
+
     constructor(room: Room) {
         this.room = room;
         this.spawn = room.mainSpawn;
