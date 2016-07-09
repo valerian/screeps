@@ -55,6 +55,11 @@ export namespace CreepFactory {
             if (!prototype.tryEnforceRatio())
                 break;
 
+        if (!prototype.checkRatioValidity()) {
+            Log.debug('could not design a cheap enough blueprint', {file: 'creep/factory', role: CreepRole[role], desiredCost: desiredCost});
+            return undefined;
+        }
+
         let blueprint = prototype.assembleBluePrint(partOrders);
 
         Log.debug(CreepRole[role] + ' design blueprint finalized for cost ' + prototype.currentCost

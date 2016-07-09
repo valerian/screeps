@@ -12,17 +12,24 @@ export class CreepFactoryPrototype {
     protected _design: {[part: string]: number};
     protected _currentCost: number;
     protected _totalParts: number;
+
+
     public get design(): {[part: string]: number} {
         return this._design;
     }
+
+
     public get currentCost(): number {
         return this._currentCost ||
                 (this._currentCost = _.sum(this.recipe, (component) => component.cost * this._design[component.part]));
     }
+
+
     public get totalParts(): number {
         return this._totalParts ||
                 (this._totalParts = _.sum(this._design));
     }
+
 
     public constructor(recipe: CreepFactoryComponent[], desiredCost: number) {
         this.desiredCost = desiredCost;
@@ -38,10 +45,12 @@ export class CreepFactoryPrototype {
         this.averagePartCost /= this.ratioSum;
     }
 
+
     protected invalidateCache() {
         this._currentCost = undefined;
         this._totalParts = undefined;
     }
+
 
     public createRoughDesign(): boolean {
         if (this.desiredCost <= 0)
@@ -69,6 +78,7 @@ export class CreepFactoryPrototype {
 
         return true;
     }
+
 
     public tryRemovePart(): boolean {
         let highestRatioDeviationPart: string;
@@ -101,6 +111,7 @@ export class CreepFactoryPrototype {
 
         return true;
     }
+
 
     public tryAddPart(): boolean {
         let lowestRatioDeviationPart: string;
@@ -138,6 +149,7 @@ export class CreepFactoryPrototype {
 
         return true;
     }
+
 
     public tryEnforceRatio(): boolean {
         let highestDeviationEnforcablePart: string;
@@ -178,6 +190,16 @@ export class CreepFactoryPrototype {
 
         return true;
     }
+
+
+    public checkRatioValidity(): boolean {
+        for (let i in this.recipe)
+            if (this.recipe[i].isRatioEnforced &&
+                (this._design[this.recipe[i].part] / this.totalParts) < (this.recipe[i].ratioWeight / this.ratioSum))
+                return false;
+        return true;
+    }
+
 
     public assembleBluePrint(partOrders: {[part: string /* CreepBodyPart */ ]: number}): CreepBodyPart[] {
         let invertPartOrders: {[priority: number]: string[]} = invertObjectStringNumber(partOrders);
