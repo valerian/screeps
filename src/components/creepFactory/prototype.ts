@@ -1,4 +1,3 @@
-import { CreepRole } from '../../declarations/declarations';
 import { CreepFactory } from './creepFactory.ts';
 import { CreepFactoryComponent } from './component';
 import { invertObjectStringNumber } from '../../utils/helpers';

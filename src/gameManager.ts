@@ -1,13 +1,13 @@
 import { Bootstrapper } from './bootstrapper';
 
-import { Declarations } from './declarations/declarations';
-
 import { Config } from './config/config';
-import { Extensions } from './extensions/extensions';
 import { Log } from './utils/log';
 import { Console } from './utils/console';
 
 import { Colony } from './components/colony/colony';
+
+import { Creep } from './components/creep/creep';
+import { Room } from './components/room/room';
 
 export namespace GameManager {
 
@@ -21,7 +21,7 @@ export namespace GameManager {
         _cleanMemory();
         Log.trace('looping', {file: 'GameManager'});
         Config.load();
-        _.forEach(Colony.getColonies(), (colony) => colony.run());
+        _.forEach(Colony.getColonies(), colony => colony.run());
     }
 
     function _cleanMemory()

@@ -1,3 +1,6 @@
+/// <reference path="../typings/index.d.ts" />
+import * as enums from '../typings/enums';
+
 /**
  * Application bootstrap.
  * BEFORE CHANGING THIS FILE, make sure you read this:

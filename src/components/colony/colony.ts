@@ -18,7 +18,7 @@ export class Colony {
     public static getColonies(): Colony[] {
         if (!this.colonies) {
             this.colonies = new Array<Colony>();
-            let myRooms = _.filter(Game.rooms, (r) => r.mainSpawn && r.mainSpawn.my);
+            let myRooms: Room[] = _.filter(Game.rooms, (r) => r.mainSpawn && r.mainSpawn.my);
             for (let i in myRooms)
                 this.colonies.push(new Colony(myRooms[i]));
         }

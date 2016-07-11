@@ -1,7 +1,6 @@
 import { CreepFactory } from '../components/creepFactory/creepFactory'
 import { Config } from '../config/config'
 import { Log } from '../utils/log';
-import { CreepRole } from '../declarations/declarations';
 
 export namespace Test {
 

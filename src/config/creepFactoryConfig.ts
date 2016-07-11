@@ -1,4 +1,3 @@
-import { CreepRole } from '../declarations/declarations';
 import { CreepFactory } from '../components/creepFactory/creepFactory';
 import { CreepFactoryComponent } from '../components/creepFactory/component';
 import { Bootstrapper } from '../bootstrapper';

@@ -13,9 +13,9 @@
     ],
     "files": [
         "typings/index.d.ts",
-        "src/boot/main.ts",
         "typings/globals/lodash/index.d.ts",
-        "typings/globals/screeps/index.d.ts"
+        "typings/globals/screeps/index.d.ts",
+        "src/boot/main.ts"
     ],
     "bundles": {
         "main": {

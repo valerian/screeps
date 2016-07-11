@@ -1,6 +1,5 @@
 import { Log } from '../../utils/log';
 import { Config } from '../../config/config';
-import { CreepRole } from '../../declarations/declarations';
 import { CreepFactoryConfig } from '../../config/creepFactoryConfig';
 import { CreepFactoryComponent } from './component';
 import { CreepFactoryPrototype } from './prototype';

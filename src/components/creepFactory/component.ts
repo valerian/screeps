@@ -1,4 +1,3 @@
-import { CreepRole } from '../../declarations/declarations';
 
 export class CreepFactoryComponent {
     public part: CreepBodyPart;
