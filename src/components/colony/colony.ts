@@ -15,6 +15,10 @@ export class Colony {
     public overseer: ColonyOverseer;
     public queen: ColonyQueen;
 
+    public get creeps() {
+        return _.filter(Game.creeps, creep => creep.spawnName);
+    }
+
     public static getColonies(): Colony[] {
         if (!this.colonies) {
             this.colonies = new Array<Colony>();
@@ -37,5 +41,8 @@ export class Colony {
 
     public run(): void {
         Log.trace('colony "' + this.room.name + '" running', { file: 'colony', room: this.room.name });
+        _.forEach(this.creeps, creep => {
+            creep.say('hello, I \'m a ' + creep.role + '!');
+        });
     }
 }

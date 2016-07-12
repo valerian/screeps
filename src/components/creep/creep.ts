@@ -1,6 +1,6 @@
 /// <reference path="./creep.d.ts" />
 
-import { Bootstrapper } from '../../bootstrapper.ts';
+import { safeExtendPrototype } from '../../utils/reflection';
 
 export namespace Creep {}
 
@@ -22,4 +22,4 @@ class Creep_EXTENSION extends Creep {
     }
 }
 
-Bootstrapper.safeExtendPrototype(Creep, Creep_EXTENSION);
+safeExtendPrototype(Creep, Creep_EXTENSION);

@@ -1,6 +1,6 @@
 /// <reference path="./room.d.ts" />
 
-import { Bootstrapper } from '../../bootstrapper.ts';
+import { safeExtendPrototype } from '../../utils/reflection';
 
 export namespace Room {}
 
@@ -14,4 +14,4 @@ class Room_EXTENSION extends Room {
     }
 }
 
-Bootstrapper.safeExtendPrototype(Room, Room_EXTENSION);
+safeExtendPrototype(Room, Room_EXTENSION);

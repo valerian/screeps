@@ -1,4 +1,4 @@
-import { Bootstrapper } from './bootstrapper';
+import { GameState } from './gameState';
 
 import { Config } from './config/config';
 import { Log } from './utils/log';
@@ -9,26 +9,23 @@ import { Colony } from './components/colony/colony';
 import { Creep } from './components/creep/creep';
 import { Room } from './components/room/room';
 
+import { cleanMemory } from './utils/helpers';
+
 export namespace GameManager {
 
     export function globalBootstrap() {
-        Log.trace('bootstrapping', {file: 'GameManager'});
-        Config.load();
-        Bootstrapper.execute();
+        Log.trace('bootstrap', {file: 'GameManager'});
+        GameState.bootstrap.broadcast();
+        Log.trace('init', {file: 'GameManager'});
+        GameState.init.broadcast();
     }
 
     export function loop() {
-        _cleanMemory();
-        Log.trace('looping', {file: 'GameManager'});
-        Config.load();
+        cleanMemory();
+        Log.trace('loop begin', {file: 'GameManager'});
+        GameState.loopBegin.broadcast();
         _.forEach(Colony.getColonies(), colony => colony.run());
-    }
-
-    function _cleanMemory()
-    {
-        for (let key in ['creeps', 'spawns', 'rooms', 'flags'])
-            for (let i in Memory[key])
-                if(!(Game as { [name: string]: any })[key][i])
-                    delete Memory[key][i];
+        Log.trace('loop end', {file: 'GameManager'});
+        GameState.loopEnd.broadcast();
     }
 }

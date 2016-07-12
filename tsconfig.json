@@ -4,7 +4,8 @@
         "target": "es6",
         "removeComments": true,
         "noResolve": false,
-        "noImplicitAny": true
+        "noImplicitAny": true,
+        "experimentalDecorators": true
     },
     "compileOnSave": false,
     "exclude": [

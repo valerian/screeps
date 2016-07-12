@@ -1,9 +1,9 @@
 import { CreepFactory, CreepFactoryComponent } from '../components/creepFactory/index';
-import { Bootstrapper } from '../bootstrapper';
+import { GameState } from '../gameState';
 
 export namespace CreepFactoryConfig {
 
-    function init() {
+    GameState.init.subscribe(() => {
 
         // higher number = more in front of the creep
 
@@ -66,6 +66,5 @@ export namespace CreepFactoryConfig {
             new CreepFactoryComponent('heal', 30).setMinimum(1),
             new CreepFactoryComponent('move', 50).setMinimum(1).enforceRatio()
         ]);
-    }
-    Bootstrapper.registerBootstrapFunction(init);
+    });
 }

@@ -1,22 +1,21 @@
 import { Log } from '../utils/log'
 import { Config } from '../config/config'
-import { Test } from '../test/test';
-import { Bootstrapper } from '../bootstrapper'
+import { Debug } from '../debug/debug';
+import { GameState } from '../gameState'
 
 export namespace Console {
-    
-    function init() {
+
+    GameState.init.subscribe(() => {
         // non-function global accessors
-        global['test'] = Test;
-        
+        global['debug'] = Debug;
+
         // functions
         global['logdump'] = logdump;
         global['warnMode'] = warnMode;
         global['infoMode'] = infoMode;
         global['debugMode'] = debugMode;
         global['traceMode'] = traceMode;
-    }
-    Bootstrapper.registerBootstrapFunction(init);
+    });
 
     export function logdump(level: Log.Level = Log.Level.Info): boolean {
         let version = level >= Log.Level.Info ? 'logInfo' : 'log';
