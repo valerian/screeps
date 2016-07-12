@@ -1,8 +1,7 @@
 import { Log } from '../../utils/log';
 import { Config } from '../../config/config';
 import { CreepFactoryConfig } from '../../config/creepFactoryConfig';
-import { CreepFactoryComponent } from './component';
-import { CreepFactoryPrototype } from './prototype';
+import { CreepFactoryComponent, CreepFactoryPrototype } from './index';
 
 export namespace CreepFactory {
 

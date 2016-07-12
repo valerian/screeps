@@ -1,5 +1,4 @@
-import { CreepFactory } from './creepFactory.ts';
-import { CreepFactoryComponent } from './component';
+import { CreepFactory, CreepFactoryComponent } from './index';
 import { invertObjectStringNumber } from '../../utils/helpers';
 
 export class CreepFactoryPrototype {

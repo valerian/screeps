@@ -1,5 +1,4 @@
-import { CreepFactory } from '../components/creepFactory/creepFactory';
-import { CreepFactoryComponent } from '../components/creepFactory/component';
+import { CreepFactory, CreepFactoryComponent } from '../components/creepFactory/index';
 import { Bootstrapper } from '../bootstrapper';
 
 export namespace CreepFactoryConfig {

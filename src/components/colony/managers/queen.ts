@@ -1,5 +1,5 @@
 import { Colony } from '../colony'
-import { CreepFactory } from '../../creepFactory/creepFactory'
+import { CreepFactory } from '../../creepFactory/index'
 
 export class ColonyQueen {
     public colony: Colony;
