@@ -1,7 +1,7 @@
-import { Log } from '../../utils/log';
-import { Config } from '../../config/config';
-import { CreepFactoryConfig } from '../../config/creepFactoryConfig';
-import { CreepFactoryComponent, CreepFactoryPrototype } from './index';
+import { Log } from "../../utils/log";
+import { Config } from "../../config/config";
+import { CreepFactoryConfig } from "../../config/creepFactoryConfig";
+import { CreepFactoryComponent, CreepFactoryPrototype } from "./index";
 
 export namespace CreepFactory {
 
@@ -35,13 +35,13 @@ export namespace CreepFactory {
         let prototype: CreepFactoryPrototype = new CreepFactoryPrototype(recipes[role], desiredCost);
 
         if (!prototype.createRoughDesign()) {
-            Log.debug('could not design a cheap enough blueprint', {file: 'creep/factory', role: CreepRole[role], desiredCost: desiredCost});
+            Log.debug("could not design a cheap enough blueprint", {file: "creep/factory", role: CreepRole[role], desiredCost: desiredCost});
             return undefined;
         }
 
         while (prototype.currentCost > desiredCost || prototype.totalParts > MAX_CREEP_SIZE)
             if (!prototype.tryRemovePart()) {
-                Log.debug('could not design a cheap enough blueprint', {file: 'creep/factory', role: CreepRole[role], desiredCost: desiredCost});
+                Log.debug("could not design a cheap enough blueprint", {file: "creep/factory", role: CreepRole[role], desiredCost: desiredCost});
                 return undefined;
             }
 
@@ -54,15 +54,15 @@ export namespace CreepFactory {
                 break;
 
         if (!prototype.checkRatioValidity()) {
-            Log.debug('could not design a cheap enough blueprint', {file: 'creep/factory', role: CreepRole[role], desiredCost: desiredCost});
+            Log.debug("could not design a cheap enough blueprint", {file: "creep/factory", role: CreepRole[role], desiredCost: desiredCost});
             return undefined;
         }
 
         let blueprint = prototype.assembleBluePrint(partOrders);
 
-        Log.debug(CreepRole[role] + ' design blueprint finalized for cost ' + prototype.currentCost
-                  + ' (desired cost ' + desiredCost + ')', prototype.design);
-        Log.debug(CreepRole[role] + ': ' + JSON.stringify(blueprint).toUpperCase());
+        Log.debug(CreepRole[role] + " design blueprint finalized for cost " + prototype.currentCost
+                  + " (desired cost " + desiredCost + ")", prototype.design);
+        Log.debug(CreepRole[role] + ": " + JSON.stringify(blueprint).toUpperCase());
 
         return blueprint;
     }

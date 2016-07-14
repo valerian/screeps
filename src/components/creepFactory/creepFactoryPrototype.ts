@@ -1,5 +1,5 @@
-import { CreepFactory, CreepFactoryComponent } from './index';
-import { invertObjectStringNumber } from '../../utils/helpers';
+import { CreepFactory, CreepFactoryComponent } from "./index";
+import { invertObjectStringNumber } from "../../utils/helpers";
 
 export class CreepFactoryPrototype {
     protected isDesigned: boolean;
@@ -133,13 +133,13 @@ export class CreepFactoryPrototype {
             let currentRatioDeviation = currentRatio - (this.recipe[i].ratioWeight / this.ratioSum);
             let increasedRatioDeviation = increasedRatio - (this.recipe[i].ratioWeight / this.ratioSum);
             let ratioDeviationScore = currentRatioDeviation + increasedRatioDeviation;
-            if (typeof lowestRatioDeviationScore === 'undefined' || ratioDeviationScore < lowestRatioDeviationScore) {
+            if (typeof lowestRatioDeviationScore === "undefined" || ratioDeviationScore < lowestRatioDeviationScore) {
                 lowestRatioDeviationPart = this.recipe[i].part;
                 lowestRatioDeviationScore = ratioDeviationScore;
             }
         }
 
-        if (typeof lowestRatioDeviationPart === 'undefined')
+        if (typeof lowestRatioDeviationPart === "undefined")
             return false;
 
         this._design[lowestRatioDeviationPart]++;
@@ -174,13 +174,13 @@ export class CreepFactoryPrototype {
             let currentRatioDeviation = currentRatio - (this.recipe[i].ratioWeight / this.ratioSum);
             let reducedRatioDeviation = reducedRatio - (this.recipe[i].ratioWeight / this.ratioSum);
             let ratioDeviationScore = currentRatioDeviation + reducedRatioDeviation;
-            if (typeof highestDeviationEnforcableScore === 'undefined' || ratioDeviationScore > highestDeviationEnforcableScore) {
+            if (typeof highestDeviationEnforcableScore === "undefined" || ratioDeviationScore > highestDeviationEnforcableScore) {
                 highestDeviationEnforcablePart = this.recipe[i].part;
                 highestDeviationEnforcableScore = ratioDeviationScore;
             }
         }
 
-        if (typeof highestDeviationEnforcablePart === 'undefined')
+        if (typeof highestDeviationEnforcablePart === "undefined")
             return false;
 
         this._design[highestDeviationEnforcablePart]--;

@@ -1,8 +1,8 @@
-import { Log } from '../../utils/log';
-import { ColonyArchitect } from './managers/architect'
-import { ColonyGeneral } from './managers/general'
-import { ColonyOverseer } from './managers/overseer'
-import { ColonyQueen } from './managers/queen'
+import { Log } from "../../utils/log";
+import { ColonyArchitect } from "./managers/architect";
+import { ColonyGeneral } from "./managers/general";
+import { ColonyOverseer } from "./managers/overseer";
+import { ColonyQueen } from "./managers/queen";
 
 export class Colony {
     private static colonies: Colony[];
@@ -40,9 +40,9 @@ export class Colony {
     }
 
     public run(): void {
-        Log.trace('colony "' + this.room.name + '" running', { file: 'colony', room: this.room.name });
+        Log.trace("colony \"" + this.room.name + "\" running", { file: "colony", room: this.room.name });
         _.forEach(this.creeps, creep => {
-            creep.say('hello, I \'m a ' + creep.role + '!');
+            creep.say("I'm a " + creep.role + "!");
         });
     }
 }

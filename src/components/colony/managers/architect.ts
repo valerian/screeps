@@ -1,4 +1,4 @@
-import { Colony } from '../colony'
+import { Colony } from "../colony"
 
 export class ColonyArchitect {
     public colony: Colony;

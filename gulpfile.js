@@ -6,6 +6,10 @@ var tsproject = require('tsproject');
 var clean = require('gulp-clean');
 var https = require('https');
 var fs = require('fs');
+var tslint = require("gulp-tslint");
+var flatten = require('./libs/flatten.js');
+//var flatten = require('gulp-flatten');
+//var flattenRequires = require('gulp-flatten-requires');
 
 var config = require('./config.json');
 
@@ -14,9 +18,27 @@ gulp.task('clean', function () {
     .pipe(clean());
 });
 
-gulp.task('compile', ['clean'], function () {
+gulp.task('compile', ['tslint'], function () {
     return tsproject.src('./tsconfig.json')
         .pipe(gulp.dest('dist'));
+});
+
+gulp.task('compile-test', ['clean'], function () {
+    return tsproject.src('./tsconfig.json')
+        .pipe(gulp.dest('dist'));
+});
+
+gulp.task('flatten', function () {
+    return gulp.src('./dist/src/**/*.js')
+        .pipe(flatten())
+//        .pipe(flattenRequires())
+        .pipe(gulp.dest('./dist/flat'))
+});
+
+gulp.task("tslint", ['clean'], () => {
+    return gulp.src("./src/**/*.ts")
+        .pipe(tslint({ formatter: "prose" }))
+        .pipe(tslint.report({ summarizeFailureOutput: true }));
 });
 
 gulp.task('upload-sim', ['compile'], function () {

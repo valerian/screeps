@@ -1,5 +1,5 @@
-import { GameState } from '../gameState';
-import { Log } from '../utils/log';
+import { GameState } from "../gameState";
+import { Log } from "../utils/log";
 
 export namespace Config {
     let initialState: {[key: string]: any};
@@ -21,7 +21,7 @@ export namespace Config {
         }
         initialState = {};
         _.forEach(Memory.config, (value, key) => {
-            if (typeof (Config as {[key: string]: any})[key] !== 'undefined') {
+            if (typeof (Config as {[key: string]: any})[key] !== "undefined") {
                 (Config as {[key: string]: any})[key] = value;
                 initialState[key] = value;
             }
@@ -29,13 +29,13 @@ export namespace Config {
     }
 
     export function save() {
-        Log.debug('attempting to save', { file: 'config', initialStateDefined: typeof initialState !== 'undefined', hasChanged:_hasChanged()});
-        if (typeof initialState !== 'undefined' && !_hasChanged())
+        Log.debug("attempting to save", { file: "config", initialStateDefined: typeof initialState !== "undefined", hasChanged:_hasChanged()});
+        if (typeof initialState !== "undefined" && !_hasChanged())
             return;
         if (!Memory.config)
             Memory.config = {};
         _.forEach(Config, (value, key) => {
-            if (key != 'initialState' && !_.isFunction(value))
+            if (key != "initialState" && !_.isFunction(value))
                 Memory.config[key] = value;
         });
     }

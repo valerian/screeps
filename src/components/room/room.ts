@@ -1,6 +1,6 @@
 /// <reference path="./room.d.ts" />
 
-import { safeExtendPrototype } from '../../utils/reflection';
+import { safeExtendPrototype } from "../../utils/reflection";
 
 export namespace Room {}
 

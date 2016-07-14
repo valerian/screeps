@@ -4,8 +4,8 @@ export function Memoized(target:any, propertyKey:string, descriptor:PropertyDesc
     let originalGet = descriptor.get;
 
     descriptor.get = function() {
-        if(!this.hasOwnProperty('__memoized__'))
-            Object.defineProperty(this, '__memoized__', { value: new Map() });
+        if(!this.hasOwnProperty("__memoized__"))
+            Object.defineProperty(this, "__memoized__", { value: new Map() });
 
         return this.__memoized__.has(propertyKey) ?
                 this.__memoized__.get(propertyKey) :

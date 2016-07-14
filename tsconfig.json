@@ -16,13 +16,15 @@
         "typings/index.d.ts",
         "typings/globals/lodash/index.d.ts",
         "typings/globals/screeps/index.d.ts",
+        "src/typings/index.d.ts",
+        "src/typings/enums.ts",
         "src/boot/main.ts"
-    ],
-    "bundles": {
-        "main": {
-            "files": [
-                "src/boot/main.ts"
-            ]
-        }
-    }
+    ]
+//    "bundles": {
+//        "main": {
+//            "files": [
+//                "src/boot/main.ts"
+//            ]
+//        }
+//    }
 }

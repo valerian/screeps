@@ -1,6 +1,6 @@
-import { CreepFactory } from '../components/creepFactory/creepFactory'
-import { Config } from '../config/config'
-import { Log } from '../utils/log';
+import { CreepFactory } from "../components/creepFactory/creepFactory"
+import { Config } from "../config/config"
+import { Log } from "../utils/log";
 
 export namespace Debug {
 
@@ -9,7 +9,7 @@ export namespace Debug {
 
         Config.logConsoleLevel = Log.Level.Debug;
 
-        Log.debug('design blueprint test for ' + CreepRole[role]);
+        Log.debug("design blueprint test for " + CreepRole[role]);
 
         for (let cost = 0; cost <= 1300; cost += 50) {
             CreepFactory.designBlueprint(role, cost);

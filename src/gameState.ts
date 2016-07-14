@@ -1,4 +1,4 @@
-import { Signal } from './utils/signal';
+import { Signal } from "./utils/signal";
 
 export namespace GameState {
     export let bootstrap: Signal = new Signal();

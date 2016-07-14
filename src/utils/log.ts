@@ -1,4 +1,4 @@
-import { Config } from '../config/config';
+import { Config } from "../config/config";
 
 export namespace Log {
 
@@ -13,16 +13,16 @@ export namespace Log {
         }
 
         getLine(showLevel: boolean = true, showDate: boolean = true, showTick: boolean = true, showContext: boolean = true): string {
-            let line: string = '';
+            let line: string = "";
             if (showLevel)
-                line += '[' + Level[this.level] + '] ';
+                line += "[" + Level[this.level] + "] ";
             if (showDate)
-                line += '[' + getFormattedDate() + '] ';
+                line += "[" + getFormattedDate() + "] ";
             if (showTick)
-                line += '[t:' + this.tick + '] ';
+                line += "[t:" + this.tick + "] ";
             if (this.context && showContext)
                 for (let key in this.context)
-                    line += '[' + key + ':' + this.context[key] + '] ';
+                    line += "[" + key + ":" + this.context[key] + "] ";
             line += this.message;
             return line;
         }
@@ -79,19 +79,19 @@ export namespace Log {
     }
 
     export function getFormattedDate(): string {
-        return getFormattedDate_cache || (getFormattedDate_cache = new Date().toISOString().slice(0, 19).replace('T', ' '));
+        return getFormattedDate_cache || (getFormattedDate_cache = new Date().toISOString().slice(0, 19).replace("T", " "));
     }
     let getFormattedDate_cache: string;
     
     function _getMemory(): LogEntry[] {
-        if (!Memory['log'])
-            Memory['log'] = new Array<LogEntry>();
-        return <LogEntry[]> Memory['log'];
+        if (!Memory["log"])
+            Memory["log"] = new Array<LogEntry>();
+        return <LogEntry[]> Memory["log"];
     }
 
     function _getMemoryInfo(): LogEntry[] {
-        if (!Memory['logInfo'])
-            Memory['logInfo'] = new Array<LogEntry>();
-        return <LogEntry[]> Memory['logInfo'];
+        if (!Memory["logInfo"])
+            Memory["logInfo"] = new Array<LogEntry>();
+        return <LogEntry[]> Memory["logInfo"];
     }
 }
