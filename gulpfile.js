@@ -30,7 +30,7 @@ gulp.task('compile-test', ['clean'], function () {
 
 gulp.task('flatten', function () {
     return gulp.src('./dist/src/**/*.js')
-        .pipe(flatten())
+        .pipe(flatten(1))
 //        .pipe(flattenRequires())
         .pipe(gulp.dest('./dist/flat'))
 });
