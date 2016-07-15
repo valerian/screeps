@@ -1,12 +1,9 @@
-/// <reference path="./room.d.ts" />
-
+import "./room.d.ts";
 import { safeExtendPrototype } from "../../utils/reflection";
 
-export namespace Room {}
-
-class Room_EXTENSION extends Room {
+class RoomExtension extends Room {
     get spawns(): Spawn[] {
-        return _.filter(Game.spawns, (spawn) => spawn.room.name == this.name);
+        return _.filter(Game.spawns, (spawn) => spawn.room.name === this.name);
     }
 
     get mainSpawn(): Spawn {
@@ -14,4 +11,4 @@ class Room_EXTENSION extends Room {
     }
 }
 
-safeExtendPrototype(Room, Room_EXTENSION);
+safeExtendPrototype(Room, RoomExtension);

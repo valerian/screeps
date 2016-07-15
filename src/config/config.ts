@@ -1,36 +1,34 @@
-import { GameState } from "../gameState";
-import { Log } from "../utils/log";
+import { LogLevel } from "../typings/enums.ts";
+import * as GameState from "../gameState";
+import * as Log from "../utils/log";
 
-export namespace Config {
-    let initialState: {[key: string]: any};
+export class Config {
+    initialState: {[key: string]: any};
 
-    export let logConsoleLevel: Log.Level = Log.Level.Info;
-    export let logNotifyLevel: Log.Level = Log.Level.Warn;
-    export let logNotifyMinutes: number = 5;
-    export let logMemoryLevel: Log.Level = Log.Level.Trace;
-    export let logMemorySize: number = 5000;
-    export let creepFactoryRefineIterations: number = 25;
+    logConsoleLevel: LogLevel = LogLevel.Info;
+    logNotifyLevel: LogLevel = LogLevel.Warn;
+    logNotifyMinutes: number = 5;
+    logMemoryLevel: LogLevel = LogLevel.Trace;
+    logMemorySize: number = 5000;
+    creepFactoryRefineIterations: number = 25;
 
-    GameState.bootstrap.subscribe(() => { load() });
-    GameState.loopBegin.subscribe(() => { load() });
-
-    export function load() {
+    load() {
         if (!Memory.config) {
-            save();
+            this.save();
             return;
         }
-        initialState = {};
+        this.initialState = {};
         _.forEach(Memory.config, (value, key) => {
             if (typeof (Config as {[key: string]: any})[key] !== "undefined") {
                 (Config as {[key: string]: any})[key] = value;
-                initialState[key] = value;
+                this.initialState[key] = value;
             }
         });
     }
 
-    export function save() {
-        Log.debug("attempting to save", { file: "config", initialStateDefined: typeof initialState !== "undefined", hasChanged:_hasChanged()});
-        if (typeof initialState !== "undefined" && !_hasChanged())
+    save() {
+        Log.debug("attempting to save", { file: "config", initialStateDefined: typeof this.initialState !== "undefined", hasChanged: this._hasChanged()});
+        if (typeof this.initialState !== "undefined" && !this._hasChanged())
             return;
         if (!Memory.config)
             Memory.config = {};
@@ -40,12 +38,18 @@ export namespace Config {
         });
     }
 
-    export function _hasChanged(): boolean {
+    private _hasChanged(): boolean {
         let hasChanged = false;
-        if (initialState)
-            for (let key in initialState)
-                if ((Config as {[key: string]: any})[key] != initialState[key])
+        if (this.initialState)
+            for (let key in this.initialState)
+                if ((Config as {[key: string]: any})[key] != this.initialState[key])
                     return true;
         return false;
     }
 }
+
+let config: Config = new Config();
+export default config;
+
+GameState.bootstrap.subscribe(() => { config.load() });
+GameState.loopBegin.subscribe(() => { config.load() });

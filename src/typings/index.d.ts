@@ -1,5 +1,3 @@
-/// <reference path="./enums.d.ts" />
-
 interface global {
     [key: string]: any;
 }

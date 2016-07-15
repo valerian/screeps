@@ -1,7 +1,7 @@
-import { Colony } from "../colony"
-import { CreepFactory } from "../../creepFactory/index"
+import Colony from "../colony";
+import * as CreepFactory from "../../creepFactory/index";
 
-export class ColonyQueen {
+export default class ColonyQueen {
     public colony: Colony;
     public needEnergy: boolean;
 

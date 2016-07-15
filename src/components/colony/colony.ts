@@ -1,10 +1,12 @@
-import { Log } from "../../utils/log";
-import { ColonyArchitect } from "./managers/architect";
-import { ColonyGeneral } from "./managers/general";
-import { ColonyOverseer } from "./managers/overseer";
-import { ColonyQueen } from "./managers/queen";
+import * as Log from "../../utils/log";
+import ColonyArchitect from "./managers/architect";
+import ColonyGeneral from "./managers/general";
+import ColonyOverseer from "./managers/overseer";
+import ColonyQueen from "./managers/queen";
+import "../creep/creep.d.ts";
+import "../room/room.d.ts";
 
-export class Colony {
+export default class Colony {
     private static colonies: Colony[];
 
     public room: Room;
@@ -23,8 +25,9 @@ export class Colony {
         if (!this.colonies) {
             this.colonies = new Array<Colony>();
             let myRooms: Room[] = _.filter(Game.rooms, (r) => r.mainSpawn && r.mainSpawn.my);
-            for (let i in myRooms)
+            for (let i: number = 0; i < myRooms.length; i++) {
                 this.colonies.push(new Colony(myRooms[i]));
+            }
         }
         return this.colonies;
     }

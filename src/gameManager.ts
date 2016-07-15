@@ -1,16 +1,13 @@
-import { GameState } from "./gameState";
+import "./components/creep/creep";
+import "./components/room/room";
 
-import { Config } from "./config/config";
-import { Log } from "./utils/log";
-import { Console } from "./utils/console";
+import "./config/config";
+import "./utils/console";
 
-import { Colony } from "./components/colony/colony";
-
-import { Creep } from "./components/creep/creep";
-import { Room } from "./components/room/room";
-
+import * as GameState from "./gameState";
+import * as Log from "./utils/log";
 import { cleanMemory } from "./utils/helpers";
-
+import Colony from "./components/colony/colony";
 
 export function globalBootstrap() {
     Log.trace("bootstrap", {file: "GameManager"});

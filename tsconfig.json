@@ -5,7 +5,8 @@
         "removeComments": true,
         "noResolve": false,
         "noImplicitAny": true,
-        "experimentalDecorators": true
+        "experimentalDecorators": true,
+        "moduleResolution": "Node"
     },
     "compileOnSave": false,
     "exclude": [
@@ -17,7 +18,6 @@
         "typings/globals/lodash/index.d.ts",
         "typings/globals/screeps/index.d.ts",
         "src/typings/index.d.ts",
-        "src/typings/enums.ts",
         "src/boot/main.ts"
     ]
 }

@@ -1,11 +1,9 @@
-import { Colony } from "../colony"
+import Colony from "../colony"
 
-export class ColonyGeneral {
+export default class ColonyGeneral {
     public colony: Colony;
 
     public constructor(colony: Colony) {
         this.colony = colony;
     }
 }
-
-    

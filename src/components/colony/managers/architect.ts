@@ -1,6 +1,6 @@
-import { Colony } from "../colony"
+import Colony from "../colony";
 
-export class ColonyArchitect {
+export default class ColonyArchitect {
     public colony: Colony;
 
     public constructor(colony: Colony) {

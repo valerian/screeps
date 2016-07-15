@@ -1,20 +1,18 @@
-import { CreepFactory } from "../components/creepFactory/creepFactory"
-import { Config } from "../config/config"
-import { Log } from "../utils/log";
+import * as CreepFactory from "../components/creepFactory/index";
+import Config from "../config/config";
+import * as Log from "../utils/log";
+import { CreepRole, LogLevel } from "../typings/enums.ts";
 
-export namespace Debug {
+export function creepFactory(role: number = CreepRole.Miner) {
+    let previousLogLevel: LogLevel = Config.logConsoleLevel;
 
-    export function creepFactory(role: number = CreepRole.Miner) {
-        let previousLogLevel: Log.Level = Config.logConsoleLevel;
+    Config.logConsoleLevel = LogLevel.Debug;
 
-        Config.logConsoleLevel = Log.Level.Debug;
+    Log.debug("design blueprint test for " + CreepRole[role]);
 
-        Log.debug("design blueprint test for " + CreepRole[role]);
-
-        for (let cost = 0; cost <= 1300; cost += 50) {
-            CreepFactory.designBlueprint(role, cost);
-        }
-
-        Config.logConsoleLevel = previousLogLevel;
+    for (let cost = 0; cost <= 1300; cost += 50) {
+        CreepFactory.designBlueprint(role, cost);
     }
+
+    Config.logConsoleLevel = previousLogLevel;
 }

@@ -1,6 +1,6 @@
-import { Colony } from "../colony"
+import Colony from "../colony"
 
-export class ColonyOverseer {
+export default class ColonyOverseer {
     public colony: Colony;
 
     public constructor(colony: Colony) {

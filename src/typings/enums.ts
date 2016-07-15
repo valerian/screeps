@@ -11,3 +11,12 @@ export enum CreepRole {
     Soldier,
     Healer
 }
+
+export enum LogLevel {
+    Off,
+    Trace,
+    Debug,
+    Info,
+    Warn,
+    Error
+}

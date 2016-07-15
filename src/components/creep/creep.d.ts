@@ -1,3 +1,5 @@
+interface CreepRole {}
+
 interface Creep {
     level: number;
     role: CreepRole;

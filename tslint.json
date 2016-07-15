@@ -12,14 +12,15 @@
         "eofline": true,
         "forin": true,
         "indent": [true, "spaces"],
-        "interface-name": [true, "always-prefix"],
         "jsdoc-format": true,
         "label-position": true,
         "label-undefined": true,
         "max-line-length": [true, 120],
         "member-access": true,
         "member-ordering": [true,
-                            { "order": "statics-first" }
+                            "public-before-private",
+                            "static-before-instance",
+                            "variables-before-functions"
                            ],
         "new-parens": true,
         "no-any": false,
@@ -99,7 +100,8 @@
         "variable-name": [true,
                           "ban-keywords",
                           "check-format",
-                          "allow-pascal-case"
+                          "allow-pascal-case",
+                          "allow-leading-underscore"
                          ],
         "whitespace": [true,
                        "check-branch",
