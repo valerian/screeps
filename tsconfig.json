@@ -20,11 +20,4 @@
         "src/typings/enums.ts",
         "src/boot/main.ts"
     ]
-//    "bundles": {
-//        "main": {
-//            "files": [
-//                "src/boot/main.ts"
-//            ]
-//        }
-//    }
 }

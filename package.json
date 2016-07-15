@@ -15,6 +15,7 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "deep-equal": "^1.0.1",
     "gulp": "~3.9.0",
     "gulp-clean": "^0.3.2",
     "gulp-tslint": "^6.0.1",

@@ -1,17 +1,63 @@
 'use strict';
 
-var gulp = require('gulp');
-var gutil = require('gulp-util');
-var tsproject = require('tsproject');
+let _ = require("lodash");
 var clean = require('gulp-clean');
-var https = require('https');
-var fs = require('fs');
-var tslint = require("gulp-tslint");
+let deepEqual = require("deep-equal");
 var flatten = require('./libs/flatten.js');
-//var flatten = require('gulp-flatten');
-//var flattenRequires = require('gulp-flatten-requires');
+var fs = require('fs');
+var gulp = require('gulp');
+let gulpCollect = require("gulp-collect");
+let gulpRename = require("gulp-rename");
+var gutil = require('gulp-util');
+var https = require('https');
+let path = require('path');
+let Q = require("q");
+var tslint = require("gulp-tslint");
+var tsproject = require('tsproject');
 
 var config = require('./config.json');
+
+let gulpUploadVinylsAsModules = () => gulpCollect.list((fileVinyls, cb) => {
+    let cbd = Q.defer();
+    _gulpUploadVinylsAsModules(fileVinyls, cbd.makeNodeResolver());
+    return cbd.promise;
+});
+
+var __lastUploaded = null;
+function _gulpUploadVinylsAsModules(fileVinyls, cb) {
+    let email = config.email;
+    let password = config.password;
+    let modules = {}
+    for (let fileVinyl of fileVinyls) {
+        let moduleName = path.basename(fileVinyl.path);
+        modules[moduleName] = fileVinyl.contents.toString("utf-8");
+    }
+    console.log(`Modules: ${_.keys(modules).join(", ")}`);
+    let data = { branch: config.branch, modules: modules };
+    if (deepEqual(__lastUploaded, data)) {
+        //console.log("Skipping upload due to equal outputs.");
+        return cb(null, {});
+    }
+    __lastUploaded = data;
+
+    console.log("Uploading...");
+    let req = https.request({
+        hostname: "screeps.com",
+        port: 443,
+        path: "/api/user/code",
+        method: "POST",
+        auth: `${email}:${password}`,
+        headers: {
+            "Content-Type": "application/json; charset=utf-8"
+        }
+    }, res => {
+        console.log(`Response: ${res.statusCode}`);
+        cb(null, {});
+    });
+
+    req.end(JSON.stringify(data));
+}
+
 
 gulp.task('clean', function () {
   return gulp.src('dist', { read: false })
@@ -28,10 +74,15 @@ gulp.task('compile-test', ['clean'], function () {
         .pipe(gulp.dest('dist'));
 });
 
+gulp.task('upload-test', function () {
+    return gulp.src('./dist/flat/*.js')
+        .pipe(gulpRename(path => { path.extname = ""; }))
+        .pipe(gulpUploadVinylsAsModules())
+});
+
 gulp.task('flatten', function () {
     return gulp.src('./dist/src/**/*.js')
         .pipe(flatten(1))
-//        .pipe(flattenRequires())
         .pipe(gulp.dest('./dist/flat'))
 });
 
