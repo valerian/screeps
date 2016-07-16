@@ -2,7 +2,7 @@
   "name": "screeps-starter",
   "version": "0.0.0",
   "description": "",
-  "main": "./dist/boot/main.js",
+  "main": "./dist/main.js",
   "scripts": {
     "gulp": "gulp",
     "gulp:w": "gulp watch",

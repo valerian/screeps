@@ -5,17 +5,16 @@
         "removeComments": true,
         "noResolve": false,
         "noImplicitAny": true,
-        "experimentalDecorators": true,
-        "moduleResolution": "Node"
+        "experimentalDecorators": true
     },
     "compileOnSave": false,
     "exclude": [
         "dist",
-        "node_modules"
+        "node_modules",
+        "libs"
     ],
     "filesGlob": [
         "typings/**/*.d.ts",
-        "src/**/*.d.ts",
         "src/**/*.ts"
     ],
     "files": [

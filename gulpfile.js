@@ -14,14 +14,7 @@ let tsproject = require('tsproject');
 
 let config = require('./config.json');
 
-// Alternate compiler, more verbose but does not stop on errors
-//
-// gulp.task('compile_tsproject', ['clean', 'tsconfig-glob'], function () {
-//     return tsproject.src('./tsconfig.json')
-//         .pipe(gulp.dest('dist'));
-// });
-
-gulp.task('tsconfig-glob', function () {
+gulp.task('update-tsconfig-files', function () {
     return tsconfigGlob({
         configPath: '.',
         indent: 4
@@ -33,11 +26,17 @@ gulp.task('clean', function () {
     .pipe(clean());
 });
 
-gulp.task('compile', ['clean', 'tsconfig-glob'], function () {
+gulp.task('compile', ['clean', 'update-tsconfig-files'], function () {
     return ts_project.src()
         .pipe(ts(ts_project))
         .on('error', function(error) { process.exit(1); })
         .js.pipe(gulp.dest('dist'))
+    
+    // Alternate compiler: more verbose but does not stop on errors
+    //
+    //  return tsproject.src('./tsconfig.json')
+    //     .pipe(gulp.dest('dist'));
+    //
 });
 
 gulp.task("lint", ['compile'], () => {
@@ -57,11 +56,6 @@ gulp.task('upload', ['flatten'], function () {
     return gulp.src('./dist/flat/*.js')
         .pipe(gulpRename(path => { path.extname = ""; }))
         .pipe(gulpScreepsUpload(config.email, config.password, config.branch))
-});
-
-gulp.task('tsconfig', function () {
-    gulp.src(['scripts/**/*.ts'])
-        .pipe(tsconfig());
 });
 
 gulp.task('watch', ['build'], function () {

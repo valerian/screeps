@@ -7,6 +7,17 @@ import ColonyQueen from "./managers/queen";
 export default class Colony {
     private static colonies: Colony[];
 
+    public static getColonies(): Colony[] {
+        if (!this.colonies) {
+            this.colonies = new Array<Colony>();
+            let myRooms: Room[] = _.filter(Game.rooms, (r) => r.mainSpawn && r.mainSpawn.my);
+            for (let i: number = 0; i < myRooms.length; i++) {
+                this.colonies.push(new Colony(myRooms[i]));
+            }
+        }
+        return this.colonies;
+    }
+
     public room: Room;
     public spawn: Spawn;
     public controller: Controller;
@@ -17,17 +28,6 @@ export default class Colony {
 
     public get creeps() {
         return _.filter(Game.creeps, creep => creep.spawnName);
-    }
-
-    public static getColonies(): Colony[] {
-        if (!this.colonies) {
-            this.colonies = new Array<Colony>();
-            let myRooms: Room[] = _.filter(Game.rooms, (r) => r.mainSpawn && r.mainSpawn.my);
-            for (let i: number = 0; i < myRooms.length; i++) {
-                this.colonies.push(new Colony(myRooms[i]));
-            }
-        }
-        return this.colonies;
     }
 
     constructor(room: Room) {

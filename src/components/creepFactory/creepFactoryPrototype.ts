@@ -39,11 +39,6 @@ export default class CreepFactoryPrototype {
         this.averagePartCost /= this.ratioSum;
     }
 
-    protected invalidateCache() {
-        this._currentCost = undefined;
-        this._totalParts = undefined;
-    }
-
     public createRoughDesign(): boolean {
         if (this.desiredCost <= 0) {
             return false;
@@ -238,5 +233,10 @@ export default class CreepFactoryPrototype {
             } while (partsAffected > 0);
         }
         return result;
+    }
+
+    protected invalidateCache() {
+        this._currentCost = undefined;
+        this._totalParts = undefined;
     }
 }
