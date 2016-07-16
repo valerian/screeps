@@ -3,7 +3,6 @@
 var path = require('path');
 var through2 = require('through2');
 var PluginError = require('gulp-util').PluginError;
-var gutil = require('gulp-util')
 var recast = require('recast')
 
 module.exports = function(logAmount, stringFilter) {
