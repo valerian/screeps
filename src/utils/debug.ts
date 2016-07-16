@@ -1,7 +1,7 @@
 import * as CreepFactory from "../components/creepFactory/index";
 import Config from "../config/config";
 import * as Log from "../utils/log";
-import { CreepRole, LogLevel } from "../typings/enums.ts";
+import { CreepRole, LogLevel } from "../typings/enums";
 
 export function creepFactory(role: number = CreepRole.Miner) {
     let previousLogLevel: LogLevel = Config.logConsoleLevel;

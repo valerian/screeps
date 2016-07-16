@@ -1,5 +1,5 @@
 import Config from "../config/config";
-import { LogLevel } from "../typings/enums.ts";
+import { LogLevel } from "../typings/enums";
 
 export class LogEntry {
     constructor(public level: LogLevel,

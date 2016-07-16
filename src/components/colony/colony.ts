@@ -3,8 +3,6 @@ import ColonyArchitect from "./managers/architect";
 import ColonyGeneral from "./managers/general";
 import ColonyOverseer from "./managers/overseer";
 import ColonyQueen from "./managers/queen";
-import "../creep/creep.d.ts";
-import "../room/room.d.ts";
 
 export default class Colony {
     private static colonies: Colony[];

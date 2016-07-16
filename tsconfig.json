@@ -18,6 +18,7 @@
         "typings/globals/lodash/index.d.ts",
         "typings/globals/screeps/index.d.ts",
         "src/typings/index.d.ts",
-        "src/boot/main.ts"
+        "src/entities/index.d.ts",
+        "src/main.ts"
     ]
 }

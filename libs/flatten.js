@@ -15,7 +15,9 @@ module.exports = function(logAmount, stringFilter) {
                 file.contents = new Buffer(recast.print(recast.visit(recast.parse(file.contents.toString()), {
                     visitCallExpression: function(filePath) {
                         var expr = filePath.node;
-                        if (expr.callee.name == 'require') {
+                        if (expr.callee.name != 'require') {
+                            this.traverse(filePath);
+                        } else if (expr.callee.name == 'require') {
                             this.traverse(filePath);
                             if (expr.arguments.length && expr.arguments[0].value[0] == '.') {
                                 let arg = expr.arguments[0];
@@ -30,8 +32,7 @@ module.exports = function(logAmount, stringFilter) {
                                 if (logAmount && logAmount > 2)
                                     console.log('> failed test : expr.arguments.length && expr.arguments[0].value[0] == \'.\' : ' + expr.arguments[0].value);
                             }
-                        }
-                        else {
+                        } else {
                             return false;
                         }
                     }

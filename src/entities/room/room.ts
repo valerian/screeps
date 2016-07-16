@@ -1,4 +1,3 @@
-import "./room.d.ts";
 import { safeExtendPrototype } from "../../utils/reflection";
 
 class RoomExtension extends Room {

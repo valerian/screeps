@@ -1,4 +1,3 @@
-import "./creep.d.ts";
 import { safeExtendPrototype } from "../../utils/reflection";
 import { CreepRole } from "../../typings/enums";
 

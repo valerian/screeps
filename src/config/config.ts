@@ -1,18 +1,17 @@
-import { LogLevel } from "../typings/enums.ts";
-import * as GameState from "../gameState";
-import * as Log from "../utils/log";
+import { LogLevel } from "../typings/enums";
+import * as Broadcaster from "../broadcaster";
 
 export class Config {
-    initialState: {[key: string]: any};
+    public logConsoleLevel: LogLevel = LogLevel.Info;
+    public logNotifyLevel: LogLevel = LogLevel.Warn;
+    public logNotifyMinutes: number = 5;
+    public logMemoryLevel: LogLevel = LogLevel.Trace;
+    public logMemorySize: number = 5000;
+    public creepFactoryRefineIterations: number = 25;
 
-    logConsoleLevel: LogLevel = LogLevel.Info;
-    logNotifyLevel: LogLevel = LogLevel.Warn;
-    logNotifyMinutes: number = 5;
-    logMemoryLevel: LogLevel = LogLevel.Trace;
-    logMemorySize: number = 5000;
-    creepFactoryRefineIterations: number = 25;
+    private initialState: {[key: string]: any};
 
-    load() {
+    public load() {
         if (!Memory.config) {
             this.save();
             return;
@@ -26,8 +25,7 @@ export class Config {
         });
     }
 
-    save() {
-        Log.debug("attempting to save", { file: "config", initialStateDefined: typeof this.initialState !== "undefined", hasChanged: this._hasChanged()});
+    public save() {
         if (typeof this.initialState !== "undefined" && !this._hasChanged())
             return;
         if (!Memory.config)
@@ -51,5 +49,5 @@ export class Config {
 let config: Config = new Config();
 export default config;
 
-GameState.bootstrap.subscribe(() => { config.load() });
-GameState.loopBegin.subscribe(() => { config.load() });
+Broadcaster.bootstrap.subscribe(() => { config.load() });
+Broadcaster.loopBegin.subscribe(() => { config.load() });

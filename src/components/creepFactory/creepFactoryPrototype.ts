@@ -198,7 +198,7 @@ export default class CreepFactoryPrototype {
     }
 
     public checkRatioValidity(): boolean {
-        for (let i: number; i < this.recipe.length; i++) {
+        for (let i: number = 0; i < this.recipe.length; i++) {
             if (this.recipe[i].isRatioEnforced &&
                 (this._design[this.recipe[i].part] / this.totalParts) < (this.recipe[i].ratioWeight / this.ratioSum)) {
                 return false;
@@ -213,14 +213,14 @@ export default class CreepFactoryPrototype {
         let result: CreepBodyPart[] = [];
         let designCountdown: { [part: string]: number } = _.clone(this.design);
 
-        for (let priority: number; priority < priorities.length; priority++) {
+        for (let priority: number = 0; priority < priorities.length; priority++) {
             let partsAffected: number;
             do {
                 partsAffected = 0;
                 let parts: string[] = invertPartOrders[priorities[priority]];
                 let counts: { [part: string]: number } = {};
                 let totalCount: number = 0;
-                for (let part: number; part < parts.length; part++) {
+                for (let part: number = 0; part < parts.length; part++) {
                     totalCount += designCountdown[parts[part]];
                     counts[part] = designCountdown[parts[part]];
                 }
@@ -235,7 +235,7 @@ export default class CreepFactoryPrototype {
                         }
                     }
                 }
-            } while(partsAffected > 0);
+            } while (partsAffected > 0);
         }
         return result;
     }

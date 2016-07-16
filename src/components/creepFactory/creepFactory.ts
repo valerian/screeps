@@ -1,5 +1,4 @@
 import * as Log from "../../utils/log";
-import "../../config/creepFactoryConfig";
 import CreepFactoryComponent from "./creepFactoryComponent";
 import CreepFactoryPrototype from "./creepFactoryPrototype";
 import { CreepRole } from "../../typings/enums";

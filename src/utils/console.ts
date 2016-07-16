@@ -1,10 +1,10 @@
 import * as Log from "../utils/log";
 import Config from "../config/config";
-import * as Debug from "../debug/debug";
-import * as GameState from "../gameState";
-import { LogLevel } from "../typings/enums.ts";
+import * as Debug from "./debug";
+import * as Broadcaster from "../broadcaster";
+import { LogLevel } from "../typings/enums";
 
-GameState.init.subscribe(() => {
+Broadcaster.init.subscribe(() => {
     // non-function global accessors
     global["debug"] = Debug;
 

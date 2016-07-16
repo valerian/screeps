@@ -6,3 +6,8 @@ interface Creep {
     spawnName: string;
     spawn: Spawn;
 }
+
+interface Room {
+    spawns: Spawn[];
+    mainSpawn: Spawn;
+}
