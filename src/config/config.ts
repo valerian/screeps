@@ -6,7 +6,7 @@ export class Config {
     public logNotifyLevel: LogLevel = LogLevel.Warn;
     public logNotifyMinutes: number = 5;
     public logMemoryLevel: LogLevel = LogLevel.Trace;
-    public logMemorySize: number = 5000;
+    public logMemorySize: number = 300;
     public creepFactoryRefineIterations: number = 25;
 
     private initialState: {[key: string]: any};
@@ -26,22 +26,27 @@ export class Config {
     }
 
     public save() {
-        if (typeof this.initialState !== "undefined" && !this._hasChanged())
+        if (typeof this.initialState !== "undefined" && !this._hasChanged()) {
             return;
-        if (!Memory.config)
+        }
+        if (!Memory.config) {
             Memory.config = {};
+        }
         _.forEach(Config, (value, key) => {
-            if (key != "initialState" && !_.isFunction(value))
+            if (key !== "initialState" && !_.isFunction(value)) {
                 Memory.config[key] = value;
+            }
         });
     }
 
     private _hasChanged(): boolean {
-        let hasChanged = false;
-        if (this.initialState)
-            for (let key in this.initialState)
-                if ((Config as {[key: string]: any})[key] != this.initialState[key])
+        if (this.initialState) {
+            for (let key in this.initialState) {
+                if ((Config as {[key: string]: any})[key] !== this.initialState[key]) {
                     return true;
+                }
+            }
+        }
         return false;
     }
 }
@@ -49,5 +54,5 @@ export class Config {
 let config: Config = new Config();
 export default config;
 
-Broadcaster.bootstrap.subscribe(() => { config.load() });
-Broadcaster.loopBegin.subscribe(() => { config.load() });
+Broadcaster.bootstrap.subscribe(() => { config.load(); });
+Broadcaster.loopBegin.subscribe(() => { config.load(); });

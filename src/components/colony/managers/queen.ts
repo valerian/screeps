@@ -1,5 +1,4 @@
 import Colony from "../colony";
-import * as CreepFactory from "../../creepFactory/index";
 
 export default class ColonyQueen {
     public colony: Colony;

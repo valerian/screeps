@@ -13,12 +13,40 @@
         "dist",
         "node_modules"
     ],
+    "filesGlob": [
+        "typings/**/*.d.ts",
+        "src/**/*.d.ts",
+        "src/**/*.ts"
+    ],
     "files": [
-        "typings/index.d.ts",
         "typings/globals/lodash/index.d.ts",
         "typings/globals/screeps/index.d.ts",
-        "src/typings/index.d.ts",
+        "typings/index.d.ts",
         "src/entities/index.d.ts",
-        "src/main.ts"
+        "src/typings/index.d.ts",
+        "src/broadcaster.ts",
+        "src/components/colony/colony.ts",
+        "src/components/colony/managers/architect.ts",
+        "src/components/colony/managers/general.ts",
+        "src/components/colony/managers/overseer.ts",
+        "src/components/colony/managers/queen.ts",
+        "src/components/creepFactory/creepFactory.ts",
+        "src/components/creepFactory/creepFactoryComponent.ts",
+        "src/components/creepFactory/creepFactoryPrototype.ts",
+        "src/components/creepFactory/index.ts",
+        "src/config/config.ts",
+        "src/config/creepFactoryConfig.ts",
+        "src/entities/creep/creep.ts",
+        "src/entities/index.ts",
+        "src/entities/room/room.ts",
+        "src/main.ts",
+        "src/typings/enums.ts",
+        "src/utils/console.ts",
+        "src/utils/debug.ts",
+        "src/utils/decorator.ts",
+        "src/utils/helpers.ts",
+        "src/utils/log.ts",
+        "src/utils/reflection.ts",
+        "src/utils/signal.ts"
     ]
 }

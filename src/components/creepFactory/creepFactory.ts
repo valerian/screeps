@@ -32,19 +32,19 @@ export function designBlueprint(role: CreepRole, desiredCost: number): CreepBody
 
     if (!prototype.createRoughDesign()) {
         Log.debug("could not design a cheap enough blueprint",
-                  {file: "creep/factory", role: CreepRole[role], desiredCost: desiredCost});
+                  "CreepFactory.designBlueprint", { desiredCost: desiredCost, role: CreepRole[role] });
         return undefined;
     }
 
     while (prototype.currentCost > desiredCost || prototype.totalParts > MAX_CREEP_SIZE) {
         if (!prototype.tryRemovePart()) {
             Log.debug("could not design a cheap enough blueprint",
-                      {file: "creep/factory", role: CreepRole[role], desiredCost: desiredCost});
+                      "CreepFactory.designBlueprint", { desiredCost: desiredCost, role: CreepRole[role] });
             return undefined;
         }
     }
 
-    while (prototype.totalParts < MAX_CREEP_SIZE && prototype.currentCost != desiredCost) {
+    while (prototype.totalParts < MAX_CREEP_SIZE && prototype.currentCost !== desiredCost) {
         if (!prototype.tryAddPart()) {
             break;
         }
@@ -58,15 +58,15 @@ export function designBlueprint(role: CreepRole, desiredCost: number): CreepBody
 
     if (!prototype.checkRatioValidity()) {
         Log.debug("could not design a cheap enough blueprint",
-                  {file: "creep/factory", role: CreepRole[role], desiredCost: desiredCost});
+                  "CreepFactory.designBlueprint", { desiredCost: desiredCost, role: CreepRole[role] });
         return undefined;
     }
 
     let blueprint = prototype.assembleBluePrint(partOrders);
 
     Log.debug(CreepRole[role] + " design blueprint finalized for cost " + prototype.currentCost
-              + " (desired cost " + desiredCost + ")", prototype.design);
-    Log.debug(CreepRole[role] + ": " + JSON.stringify(blueprint).toUpperCase());
+              + " (desired cost " + desiredCost + ")", "CreepFactory.designBlueprint", prototype.design);
+    Log.debug(CreepRole[role] + ": " + JSON.stringify(blueprint).toUpperCase(), "CreepFactory.designBlueprint");
 
     return blueprint;
 }

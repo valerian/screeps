@@ -41,7 +41,7 @@ export default class Colony {
     }
 
     public run(): void {
-        Log.trace("colony \"" + this.room.name + "\" running", { file: "colony", room: this.room.name });
+        Log.trace("colony \"" + this.room.name + "\" running", "Colony.run", { room: this.room.name });
         _.forEach(this.creeps, creep => {
             creep.say("I'm a " + creep.role + "!");
         });

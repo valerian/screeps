@@ -1,18 +1,20 @@
 
 export class Signal {
-    private _callbacks: { (): any }[]
+    private _callbacks: { (): any }[];
 
     constructor() {
         this._callbacks = new Array< { (): any } >();
     }
 
     public subscribe(callback: { (): any }) {
-        if (callback)
+        if (callback) {
             this._callbacks.push(callback);
+        }
     }
 
     public broadcast() {
-        for (let i in this._callbacks)
+        for (let i in this._callbacks) {
             this._callbacks[i]();
+        }
     }
 }

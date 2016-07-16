@@ -129,7 +129,7 @@ export default class CreepFactoryPrototype {
                 break;
             }
             if (this.recipe[i].cost + this.currentCost > this.desiredCost ||
-                this.recipe[i].maximum && this._design[this.recipe[i].part] == this.recipe[i].maximum) {
+                this.recipe[i].maximum && this._design[this.recipe[i].part] === this.recipe[i].maximum) {
                 continue;
             }
             let currentRatio = this._design[this.recipe[i].part] / this.totalParts;

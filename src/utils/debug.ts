@@ -8,7 +8,7 @@ export function creepFactory(role: number = CreepRole.Miner) {
 
     Config.logConsoleLevel = LogLevel.Debug;
 
-    Log.debug("design blueprint test for " + CreepRole[role]);
+    Log.debug("design blueprint test for " + CreepRole[role], "Debug.creepFactory");
 
     for (let cost = 0; cost <= 1300; cost += 50) {
         CreepFactory.designBlueprint(role, cost);

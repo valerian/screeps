@@ -1,11 +1,10 @@
-
-export function Memoized(target:any, propertyKey:string, descriptor:PropertyDescriptor) {
-    let value:any;
+export function Memoized(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
     let originalGet = descriptor.get;
 
     descriptor.get = function() {
-        if(!this.hasOwnProperty("__memoized__"))
+        if (!this.hasOwnProperty("__memoized__")) {
             Object.defineProperty(this, "__memoized__", { value: new Map() });
+        }
 
         return this.__memoized__.has(propertyKey) ?
                 this.__memoized__.get(propertyKey) :
@@ -13,7 +12,6 @@ export function Memoized(target:any, propertyKey:string, descriptor:PropertyDesc
                     const value = originalGet.call(this);
                     this.__memoized__.set(propertyKey, value);
                     return value;
-
                 })();
     };
 }
