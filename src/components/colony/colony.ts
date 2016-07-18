@@ -5,8 +5,6 @@ import ColonyOverseer from "./managers/overseer";
 import ColonyQueen from "./managers/queen";
 
 export default class Colony {
-    private static colonies: Colony[];
-
     public static getColonies(): Colony[] {
         if (!this.colonies) {
             this.colonies = new Array<Colony>();
@@ -17,6 +15,8 @@ export default class Colony {
         }
         return this.colonies;
     }
+
+    private static colonies: Colony[];
 
     public room: Room;
     public spawn: Spawn;

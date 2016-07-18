@@ -1,3 +1,4 @@
+// tslint:disable-next-line: class-name
 interface global {
     debug: any;
     logdump: any;
