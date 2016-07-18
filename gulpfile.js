@@ -5,8 +5,10 @@ const gulp = require('gulp');
 const gulpDotFlatten = require('./libs/gulp-dot-flatten.js');
 const gulpRename = require('gulp-rename');
 const gulpScreepsUpload = require('./libs/gulp-screeps-upload.js');
+const gutil = require('gulp-util');
 const path = require('path');
 const PluginError = require('gulp-util').PluginError;
+const runSequence = require('run-sequence');
 const ts = require('gulp-typescript');
 const tsconfigGlob = require('tsconfig-glob');
 const tslint = require('gulp-tslint');
@@ -21,7 +23,7 @@ gulp.task('update-tsconfig-files', () => {
     });
 });
 
-gulp.task('lint', () => {
+gulp.task('lint-only', () => {
     return gulp.src('./src/**/*.ts')
         .pipe(tslint({ formatter: 'prose' }))
         .pipe(tslint.report({
@@ -37,7 +39,7 @@ gulp.task('clean', () => {
 
 let compileFailed = false;
 
-gulp.task('compile', ['lint', 'clean', 'update-tsconfig-files'], () => {
+gulp.task('compile', ['clean', 'update-tsconfig-files'], () => {
     compileFailed = false;
     return tsconfig.src()
         .pipe(ts(tsconfig))
@@ -51,7 +53,16 @@ gulp.task('checked-compile', ['compile'], () => {
     throw new PluginError("gulp-typescript", "failed to compile: not executing further tasks");
 })
 
-gulp.task('flatten', ['checked-compile'], () => {
+gulp.task('lint', ['checked-compile'], () => {
+    return gulp.src('./src/**/*.ts')
+        .pipe(tslint({ formatter: 'prose' }))
+        .pipe(tslint.report({
+            summarizeFailureOutput: true,
+            emitError: false
+        }))
+});
+
+gulp.task('flatten', ['lint'], () => {
     return gulp.src('./dist/src/**/*.js')
         .pipe(gulpDotFlatten(0))
         .pipe(gulp.dest('./dist/flat'))
@@ -64,9 +75,23 @@ gulp.task('upload', ['flatten'], () => {
 });
 
 gulp.task('watch', () => {
+    gutil.log(gutil.colors.green("Watching source files for change ..."));
     gulp.watch('./src/**/*.ts', ['build']);
 });
 
-gulp.task('build', ['upload']);
-gulp.task('test', ['lint']);
+gulp.task('build', () => {
+    console.log('');
+    gutil.log(gutil.colors.green("Attempting to build and upload project ..."));
+    console.log('');
+    return runSequence('upload', (error) => {
+        console.log('');
+        if (error)
+            gutil.log(gutil.colors.green("Build aborted due to errors!"));
+        else
+            gutil.log(gutil.colors.green("Build completed and uploaded successfully."));
+        console.log('');
+    });
+});
+
+gulp.task('test', ['lint-only']);
 gulp.task('default', ['watch']);
