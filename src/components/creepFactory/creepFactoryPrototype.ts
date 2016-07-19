@@ -8,8 +8,8 @@ export default class CreepFactoryPrototype {
     protected averagePartCost: number;
     protected ratioSum: number;
     protected _design: {[part: string]: number};
-    protected _currentCost: number;
-    protected _totalParts: number;
+    protected _currentCost: number | undefined;
+    protected _totalParts: number | undefined;
 
     public get design(): {[part: string]: number} {
         return this._design;
@@ -71,8 +71,8 @@ export default class CreepFactoryPrototype {
     }
 
     public tryRemovePart(): boolean {
-        let highestRatioDeviationPart: string;
-        let highestRatioDeviationScore: number;
+        let highestRatioDeviationPart: string | undefined;
+        let highestRatioDeviationScore: number | undefined;
 
         for (let i in this.recipe) {
             if (this._design[this.recipe[i].part] === 0 ||
@@ -108,8 +108,8 @@ export default class CreepFactoryPrototype {
     }
 
     public tryAddPart(): boolean {
-        let lowestRatioDeviationPart: string;
-        let lowestRatioDeviationScore: number;
+        let lowestRatioDeviationPart: string | undefined;
+        let lowestRatioDeviationScore: number | undefined;
 
         for (let i: number = 0; i < this.recipe.length; i++) {
             if (this.recipe[i].isRatioEnforced &&
@@ -149,8 +149,8 @@ export default class CreepFactoryPrototype {
     }
 
     public tryEnforceRatio(): boolean {
-        let highestDeviationEnforcablePart: string;
-        let highestDeviationEnforcableScore: number;
+        let highestDeviationEnforcablePart: string | undefined;
+        let highestDeviationEnforcableScore: number | undefined;
 
         for (let i: number = 0; i < this.recipe.length; i++) {
             if (!this.recipe[i].isRatioEnforced ||

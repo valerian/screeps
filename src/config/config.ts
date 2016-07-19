@@ -17,7 +17,7 @@ export class Config {
             return;
         }
         this.initialState = {};
-        _.forEach(Memory.config, (value, key) => {
+        _.forEach(Memory.config, (value: any, key: string) => {
             if (typeof (Config as {[key: string]: any})[key] !== "undefined") {
                 (Config as {[key: string]: any})[key] = value;
                 this.initialState[key] = value;
@@ -32,7 +32,7 @@ export class Config {
         if (!Memory.config) {
             Memory.config = {};
         }
-        _.forEach(Config, (value, key) => {
+        _.forEach(Config, (value: any, key: string) => {
             if (key !== "initialState" && !_.isFunction(value)) {
                 Memory.config[key] = value;
             }

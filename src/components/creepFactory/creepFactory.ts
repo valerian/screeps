@@ -23,7 +23,7 @@ export function setPartOrder(part: CreepBodyPart, priority: number) {
     partOrders[part] = priority;
 }
 
-export function designBlueprint(role: CreepRole, desiredCost: number): CreepBodyPart[] {
+export function designBlueprint(role: CreepRole, desiredCost: number): CreepBodyPart[] | undefined {
     if (!recipes[role]) {
         return undefined;
     }

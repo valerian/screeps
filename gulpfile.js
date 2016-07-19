@@ -10,18 +10,10 @@ const path = require('path');
 const PluginError = require('gulp-util').PluginError;
 const runSequence = require('run-sequence');
 const ts = require('gulp-typescript');
-const tsconfigGlob = require('tsconfig-glob');
 const tslint = require('gulp-tslint');
-const tsconfig = ts.createProject('tsconfig.json');
+const tsconfig = ts.createProject('tsconfig.json', { typescript: require('typescript') });
 
 const config = require('./config.json');
-
-gulp.task('update-tsconfig-files', () => {
-    return tsconfigGlob({
-        configPath: '.',
-        indent: 4
-    });
-});
 
 gulp.task('lint-only', () => {
     return gulp.src('./src/**/*.ts')
@@ -39,18 +31,19 @@ gulp.task('clean', () => {
 
 let compileFailed = false;
 
-gulp.task('compile', ['clean', 'update-tsconfig-files'], () => {
+gulp.task('compile', ['clean'], () => {
     compileFailed = false;
     return tsconfig.src()
         .pipe(ts(tsconfig))
         .on('error', (err) => { compileFailed = true; })
-        .js.pipe(gulp.dest('dist'));
+        .js.pipe(gulp.dest('dist/js'));
 });
 
 gulp.task('checked-compile', ['compile'], () => {
     if (!compileFailed)
         return true;
     throw new PluginError("gulp-typescript", "failed to compile: not executing further tasks");
+    compileFailed = false;
 })
 
 gulp.task('lint', ['checked-compile'], () => {
@@ -63,7 +56,7 @@ gulp.task('lint', ['checked-compile'], () => {
 });
 
 gulp.task('flatten', ['lint'], () => {
-    return gulp.src('./dist/src/**/*.js')
+    return gulp.src('./dist/js/**/*.js')
         .pipe(gulpDotFlatten(0))
         .pipe(gulp.dest('./dist/flat'))
 });
