@@ -1,5 +1,5 @@
 export default class CreepFactoryComponent {
-    public part: CreepBodyPart;
+    public readonly part: CreepBodyPart;
     public ratioWeight: number;
     public minimum: number;
     public maximum: number;

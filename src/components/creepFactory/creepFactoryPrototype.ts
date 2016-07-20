@@ -79,14 +79,14 @@ export default class CreepFactoryPrototype {
                 this.recipe[i].minimum && this._design[this.recipe[i].part] === this.recipe[i].minimum) {
                 continue;
             }
-            let currentRatio = this._design[this.recipe[i].part] / this.totalParts;
-            let reducedRatio = (this._design[this.recipe[i].part] - 1) / (this.totalParts - 1);
+            const currentRatio = this._design[this.recipe[i].part] / this.totalParts;
+            const reducedRatio = (this._design[this.recipe[i].part] - 1) / (this.totalParts - 1);
             if (this.recipe[i].isRatioEnforced && reducedRatio < (this.recipe[i].ratioWeight / this.ratioSum)) {
                 continue;
             }
-            let currentRatioDeviation = currentRatio - (this.recipe[i].ratioWeight / this.ratioSum);
-            let reducedRatioDeviation = reducedRatio - (this.recipe[i].ratioWeight / this.ratioSum);
-            let ratioDeviationScore = currentRatioDeviation + reducedRatioDeviation;
+            const currentRatioDeviation = currentRatio - (this.recipe[i].ratioWeight / this.ratioSum);
+            const reducedRatioDeviation = reducedRatio - (this.recipe[i].ratioWeight / this.ratioSum);
+            const ratioDeviationScore = currentRatioDeviation + reducedRatioDeviation;
             if (typeof highestRatioDeviationScore === undefined || ratioDeviationScore > highestRatioDeviationScore) {
                 highestRatioDeviationPart = this.recipe[i].part;
                 highestRatioDeviationScore = ratioDeviationScore;
@@ -127,11 +127,11 @@ export default class CreepFactoryPrototype {
                 this.recipe[i].maximum && this._design[this.recipe[i].part] === this.recipe[i].maximum) {
                 continue;
             }
-            let currentRatio = this._design[this.recipe[i].part] / this.totalParts;
-            let increasedRatio = (this._design[this.recipe[i].part] + 1) / (this.totalParts + 1);
-            let currentRatioDeviation = currentRatio - (this.recipe[i].ratioWeight / this.ratioSum);
-            let increasedRatioDeviation = increasedRatio - (this.recipe[i].ratioWeight / this.ratioSum);
-            let ratioDeviationScore = currentRatioDeviation + increasedRatioDeviation;
+            const currentRatio = this._design[this.recipe[i].part] / this.totalParts;
+            const increasedRatio = (this._design[this.recipe[i].part] + 1) / (this.totalParts + 1);
+            const currentRatioDeviation = currentRatio - (this.recipe[i].ratioWeight / this.ratioSum);
+            const increasedRatioDeviation = increasedRatio - (this.recipe[i].ratioWeight / this.ratioSum);
+            const ratioDeviationScore = currentRatioDeviation + increasedRatioDeviation;
             if (typeof lowestRatioDeviationScore === "undefined" || ratioDeviationScore < lowestRatioDeviationScore) {
                 lowestRatioDeviationPart = this.recipe[i].part;
                 lowestRatioDeviationScore = ratioDeviationScore;
@@ -158,9 +158,9 @@ export default class CreepFactoryPrototype {
                 this.recipe[i].minimum && this._design[this.recipe[i].part] === this.recipe[i].minimum) {
                 continue;
             }
-            let currentRatio = this._design[this.recipe[i].part] / this.totalParts;
-            let reducedRatio = (this._design[this.recipe[i].part] - 1) / (this.totalParts - 1);
-            let reducedOtherRatio = this._design[this.recipe[i].part] / (this.totalParts - 1);
+            const currentRatio = this._design[this.recipe[i].part] / this.totalParts;
+            const reducedRatio = (this._design[this.recipe[i].part] - 1) / (this.totalParts - 1);
+            const reducedOtherRatio = this._design[this.recipe[i].part] / (this.totalParts - 1);
             if (reducedOtherRatio < (this.recipe[i].ratioWeight / this.ratioSum)) {
                 if (reducedRatio < (this.recipe[i].ratioWeight / this.ratioSum)) {
                     highestDeviationEnforcablePart = undefined;
@@ -172,9 +172,9 @@ export default class CreepFactoryPrototype {
             if (reducedRatio < (this.recipe[i].ratioWeight / this.ratioSum)) {
                 continue;
             }
-            let currentRatioDeviation = currentRatio - (this.recipe[i].ratioWeight / this.ratioSum);
-            let reducedRatioDeviation = reducedRatio - (this.recipe[i].ratioWeight / this.ratioSum);
-            let ratioDeviationScore = currentRatioDeviation + reducedRatioDeviation;
+            const currentRatioDeviation = currentRatio - (this.recipe[i].ratioWeight / this.ratioSum);
+            const reducedRatioDeviation = reducedRatio - (this.recipe[i].ratioWeight / this.ratioSum);
+            const ratioDeviationScore = currentRatioDeviation + reducedRatioDeviation;
             if (typeof highestDeviationEnforcableScore === "undefined"
                 || ratioDeviationScore > highestDeviationEnforcableScore) {
                 highestDeviationEnforcablePart = this.recipe[i].part;
@@ -203,17 +203,17 @@ export default class CreepFactoryPrototype {
     }
 
     public assembleBluePrint(partOrders: {[part: string /* CreepBodyPart */ ]: number}): CreepBodyPart[] {
-        let invertPartOrders: {[priority: number]: string[]} = invertObjectStringNumber(partOrders);
-        let priorities: number[] = _.uniq(_.values(partOrders)).sort() as number[];
-        let result: CreepBodyPart[] = [];
-        let designCountdown: { [part: string]: number } = _.clone(this.design);
+        const invertPartOrders: {[priority: number]: string[]} = invertObjectStringNumber(partOrders);
+        const priorities: number[] = _.uniq(_.values(partOrders)).sort() as number[];
+        const result: CreepBodyPart[] = [];
+        const designCountdown: { [part: string]: number } = _.clone(this.design);
 
         for (let priority: number = 0; priority < priorities.length; priority++) {
             let partsAffected: number;
             do {
                 partsAffected = 0;
-                let parts: string[] = invertPartOrders[priorities[priority]];
-                let counts: { [part: string]: number } = {};
+                const parts: string[] = invertPartOrders[priorities[priority]];
+                const counts: { [part: string]: number } = {};
                 let totalCount: number = 0;
                 for (let part: number = 0; part < parts.length; part++) {
                     totalCount += designCountdown[parts[part]];
@@ -221,7 +221,7 @@ export default class CreepFactoryPrototype {
                 }
                 for (let part in parts) {
                     if (designCountdown[parts[part]]) {
-                        let toAdd: number = Math.min(designCountdown[parts[part]],
+                        const toAdd: number = Math.min(designCountdown[parts[part]],
                                                      (counts[part] > totalCount / parts.length ? 2 : 1));
                         designCountdown[parts[part]] -= toAdd;
                         for (let i = 0; i < toAdd; i++) {

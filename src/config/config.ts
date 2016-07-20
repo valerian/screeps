@@ -1,4 +1,4 @@
-import { LogLevel } from "../typings/enums";
+import { LogLevel } from "../declarations/enums";
 import * as Broadcaster from "../broadcaster";
 
 export class Config {
@@ -51,7 +51,7 @@ export class Config {
     }
 }
 
-let config: Config = new Config();
+const config: Config = new Config();
 export default config;
 
 Broadcaster.bootstrap.subscribe(() => { config.load(); });

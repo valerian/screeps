@@ -1,10 +1,10 @@
 import * as Log from "../../utils/log";
 import CreepFactoryComponent from "./creepFactoryComponent";
 import CreepFactoryPrototype from "./creepFactoryPrototype";
-import { CreepRole } from "../../typings/enums";
+import { CreepRole } from "../../declarations/enums";
 
-let recipes: {[role: number /* CreepRole */]: CreepFactoryComponent[]} = {};
-let partOrders: {[part: string /* CreepBodyPart */ ]: number} = {
+const recipes: {[role: number /* CreepRole */]: CreepFactoryComponent[]} = {};
+const partOrders: {[part: string /* CreepBodyPart */ ]: number} = {
     attack: 0,
     carry: 0,
     claim: 0,
@@ -28,7 +28,7 @@ export function designBlueprint(role: CreepRole, desiredCost: number): CreepBody
         return undefined;
     }
 
-    let prototype: CreepFactoryPrototype = new CreepFactoryPrototype(recipes[role], desiredCost);
+    const prototype: CreepFactoryPrototype = new CreepFactoryPrototype(recipes[role], desiredCost);
 
     if (!prototype.createRoughDesign()) {
         Log.debug("could not design a cheap enough blueprint",
@@ -62,7 +62,7 @@ export function designBlueprint(role: CreepRole, desiredCost: number): CreepBody
         return undefined;
     }
 
-    let blueprint = prototype.assembleBluePrint(partOrders);
+    const blueprint = prototype.assembleBluePrint(partOrders);
 
     Log.debug(CreepRole[role] + " design blueprint finalized for cost " + prototype.currentCost
               + " (desired cost " + desiredCost + ")", "CreepFactory.designBlueprint", prototype.design);

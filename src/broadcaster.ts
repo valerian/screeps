@@ -1,6 +1,6 @@
 import { Signal } from "./utils/signal";
 
-export const bootstrap: Signal = new Signal();
-export const init: Signal = new Signal();
-export const loopBegin: Signal = new Signal();
-export const loopEnd: Signal = new Signal();
+export const bootstrap = new Signal();
+export const init = new Signal();
+export const loopBegin = new Signal();
+export const loopEnd = new Signal();

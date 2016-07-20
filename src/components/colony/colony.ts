@@ -8,7 +8,7 @@ export default class Colony {
     public static getColonies(): Colony[] {
         if (!this.colonies) {
             this.colonies = new Array<Colony>();
-            let myRooms: Room[] = _.filter(Game.rooms, (r) => r.mainSpawn && r.mainSpawn.my);
+            const myRooms: Room[] = _.filter(Game.rooms, (r) => r.mainSpawn && r.mainSpawn.my);
             for (let i: number = 0; i < myRooms.length; i++) {
                 this.colonies.push(new Colony(myRooms[i]));
             }
@@ -18,19 +18,19 @@ export default class Colony {
 
     private static colonies: Colony[];
 
-    public room: Room;
-    public spawn: Spawn;
-    public controller: Controller;
-    public architect: ColonyArchitect;
-    public general: ColonyGeneral;
-    public overseer: ColonyOverseer;
-    public queen: ColonyQueen;
+    public readonly room: Room;
+    public readonly spawn: Spawn;
+    public readonly controller: Controller;
+    public readonly architect: ColonyArchitect;
+    public readonly general: ColonyGeneral;
+    public readonly overseer: ColonyOverseer;
+    public readonly queen: ColonyQueen;
 
     public get creeps() {
         return _.filter(Game.creeps, creep => creep.spawnName);
     }
 
-    constructor(room: Room) {
+    private constructor(room: Room) {
         this.room = room;
         this.spawn = room.mainSpawn;
         this.controller = room.controller;

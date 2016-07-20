@@ -1,5 +1,5 @@
 import { safeExtendPrototype } from "../../utils/reflection";
-import { CreepRole } from "../../typings/enums";
+import { CreepRole } from "../../declarations/enums";
 
 class CreepExtension extends Creep {
     get level(): number {

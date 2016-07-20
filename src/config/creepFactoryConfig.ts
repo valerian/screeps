@@ -1,7 +1,7 @@
 import { CreepFactoryComponent } from "../components/creepFactory/index";
 import * as CreepFactory from "../components/creepFactory/index";
 import * as Broadcaster from "../broadcaster";
-import { CreepRole } from "../typings/enums";
+import { CreepRole } from "../declarations/enums";
 
 Broadcaster.init.subscribe(() => {
 

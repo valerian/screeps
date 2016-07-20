@@ -2,7 +2,7 @@ import * as Log from "../utils/log";
 import Config from "../config/config";
 import * as Debug from "./debug";
 import * as Broadcaster from "../broadcaster";
-import { LogLevel } from "../typings/enums";
+import { LogLevel } from "../declarations/enums";
 
 Broadcaster.init.subscribe(() => {
     // non-function global accessors
@@ -17,13 +17,13 @@ Broadcaster.init.subscribe(() => {
 });
 
 export function logdump(level: LogLevel = LogLevel.Info): boolean {
-    let version = level >= LogLevel.Info ? "logInfo" : "log";
+    const index = level >= LogLevel.Info ? "logInfo" : "log";
     let counter: number = 0;
     console.log("[LOG DUMP STARTING]");
-    if (Memory[version]) {
-        for (let i in Memory[version]) {
-            if ((Memory[version][i] as Log.LogEntry).level >= level) {
-                console.log("[" + i + "] " + Log.LogEntry.prototype.getLine.apply(Memory[version][i]));
+    if (Memory[index]) {
+        for (let i in Memory[index]) {
+            if ((Memory[index][i] as Log.LogEntry).level >= level) {
+                console.log("[" + i + "] " + Log.LogEntry.prototype.getLine.apply(Memory[index][i]));
                 counter++;
             }
         }
